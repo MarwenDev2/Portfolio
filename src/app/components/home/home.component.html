@@ -1,0 +1,101 @@
+<section class="home-container">
+  <div class="hero">
+    <div class="hero-content" [@fadeInUp]="animationState">
+      <div class="greeting" [@typewriterAnimation]="animationState">Hi there, I'm</div>
+      <h1 class="title">Marwen <span class="highlight">Feki</span> <span class="wave">👋</span></h1>
+      <h2 class="subtitle">Software Developer | Cloud Engineering Student</h2>
+      <p class="description">
+        As a Cloud Engineering student and dedicated Software Developer, I have hands-on experience in developing robust software solutions using Angular, Java and Symfony. I am passionate about contributing to cloud technology and DevOps initiatives. Skilled at collaborating within team environments.
+      </p>
+      <div class="cta-buttons">
+        <a routerLink="/projects" class="btn primary">
+          <i class="fas fa-code"></i> View My Work
+        </a>
+        <a routerLink="/contact" class="btn secondary">
+          <i class="fas fa-envelope"></i> Contact Me
+        </a>
+        <a href="https://github.com/MarwenDev2" target="_blank" class="btn github">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+      </div>
+    </div>
+    <div class="hero-image" [@slideIn]="animationState">
+      <div class="profile-image-container">
+        <!-- User's profile picture -->
+        <img src="/assets/images/ME.png" alt="Marwen Feki" class="profile-image" />
+        <div class="image-backdrop"></div>
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tech-stack" [@fadeInUp]="animationState">
+    <h3>Technologies I Work With</h3>
+    <div class="tech-icons">
+      <div class="tech-icon" *ngFor="let tech of technologies; let i = index" [@techIconAnimation]="{value: animationState, params: {delay: i * 0.1}}">
+        <div class="icon-container">
+          <!-- Adding Font Awesome icons where applicable -->
+          <i *ngIf="getTechIcon(tech)" [class]="getTechIcon(tech)"></i>
+          <span>{{ tech }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="featured-projects" [@fadeInUp]="animationState">
+    <h3>Featured Projects</h3>
+    <div class="project-cards">
+      <div class="project-card" *ngFor="let project of featuredProjects; let i = index" [@projectCardAnimation]="{value: animationState, params: {delay: i * 0.15}}">
+        <div class="project-image">
+          <!-- Project image with fallback -->
+          <img [src]="project.image || 'assets/images/project-placeholder.jpg'" [alt]="project.name" class="project-img" />
+          <div class="project-overlay">
+            <div class="project-links">
+              <a [href]="project.demoLink" *ngIf="project.demoLink" target="_blank" class="project-action demo" title="Live Demo">
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+              <a [href]="project.githubLink" *ngIf="project.githubLink" target="_blank" class="project-action github" title="GitHub Repository">
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <h4>{{ project.name }}</h4>
+          <p>{{ project.description }}</p>
+          <div class="project-tags">
+            <span *ngFor="let tag of project.tags">{{ tag }}</span>
+          </div>
+          <div class="project-buttons">
+            <a [href]="project.demoLink" target="_blank" class="btn demo" *ngIf="project.demoLink && project.demoLink.endsWith('.mp4')" title="Watch Demo" (click)="$event.preventDefault(); openVideoDemo(project.demoLink)">
+              <i class="fas fa-play"></i>Live Demo
+            </a>
+            <a [href]="project.githubLink" *ngIf="project.githubLink" target="_blank" class="btn github">
+              <i class="fab fa-github"></i> Repository
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="view-more">
+      <a routerLink="/projects" class="btn outline">
+        <i class="fas fa-th-large"></i> View All Projects
+      </a>
+    </div>
+  </div>
+</section>
+<!-- Video Modal -->
+<div class="video-modal" *ngIf="videoModal.isOpen">
+  <div class="modal-overlay" (click)="closeVideoModal()"></div>
+  <div class="modal-content">
+    <button class="close-button" (click)="closeVideoModal()">
+      <i class="fas fa-times"></i>
+    </button>
+    <video controls #videoPlayer>
+      <source [src]="sanitizedVideoUrl" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>

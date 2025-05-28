@@ -1,0 +1,240 @@
+// Use variables from global styles
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  background-color: rgba(15, 23, 42, 0.8); // Slightly transparent background
+  backdrop-filter: blur(10px); // Modern blur effect
+  
+  &.scrolled {
+    background-color: rgba(15, 23, 42, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .logo {
+    .logo-link {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        font-family: 'Inter', sans-serif;
+        letter-spacing: 0.5px;
+        line-height: 1.2;
+        
+        .logo-accent {
+          color: var(--primary);
+          font-weight: 700;
+        }
+      }
+      
+      .logo-subtitle {
+        font-size: 0.85rem;
+        color: var(--text-tertiary);
+        font-family: 'JetBrains Mono', monospace;
+        letter-spacing: 0.5px;
+      }
+      
+      &:hover .logo-text {
+        transform: translateY(-2px);
+        transition: transform 0.3s ease;
+      }
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    
+    li {
+      margin-left: 2.5rem;
+      
+      a {
+        position: relative;
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        padding: 0.5rem 0;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background-color: var(--primary);
+          transition: width 0.3s ease;
+          border-radius: 2px;
+        }
+        
+        &:hover, &.active {
+          color: var(--text-primary);
+          
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+      
+      &.social-links {
+        display: flex;
+        gap: 1rem;
+        margin-left: 2rem;
+        
+        a {
+          font-size: 1.2rem;
+          color: var(--text-secondary);
+          transition: all 0.3s ease;
+          
+          &::after {
+            display: none;
+          }
+          
+          &:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+          }
+        }
+      }
+    }
+  }
+
+  .menu-toggle {
+    display: none;
+    cursor: pointer;
+  }
+
+  .hamburger {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    
+    span {
+      display: block;
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background: #fff;
+      border-radius: 3px;
+      opacity: 1;
+      left: 0;
+      transform: rotate(0deg);
+      transition: .25s ease-in-out;
+      
+      &:nth-child(1) {
+        top: 0px;
+      }
+      
+      &:nth-child(2) {
+        top: 9px;
+      }
+      
+      &:nth-child(3) {
+        top: 18px;
+      }
+    }
+    
+    &.active {
+      span {
+        &:nth-child(1) {
+          top: 9px;
+          transform: rotate(135deg);
+        }
+        
+        &:nth-child(2) {
+          opacity: 0;
+          left: -60px;
+        }
+        
+        &:nth-child(3) {
+          top: 9px;
+          transform: rotate(-135deg);
+        }
+      }
+    }
+  }
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .navbar {
+    .container {
+      padding: 0 1.5rem;
+    }
+    
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      height: 100vh;
+      flex-direction: column;
+      background-color: var(--background);
+      padding: 6rem 2rem 2rem;
+      transition: right 0.3s ease;
+      z-index: 900;
+      justify-content: flex-start;
+      box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
+      
+      &.open {
+        right: 0;
+      }
+      
+      li {
+        margin: 1.2rem 0;
+        width: 100%;
+        
+        a {
+          font-size: 1.1rem;
+          display: block;
+          padding: 0.75rem 0;
+        }
+        
+        &.social-links {
+          margin-top: 2rem;
+          justify-content: center;
+          
+          a {
+            font-size: 1.4rem;
+            padding: 0.5rem;
+          }
+        }
+      }
+    }
+    
+    .menu-toggle {
+      display: block;
+      z-index: 1000;
+    }
+  }
+}

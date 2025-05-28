@@ -1,0 +1,85 @@
+<div class="contact-container" [@fadeIn]="animationState">
+    <h2>Contact Me</h2>
+    <p class="section-intro">Feel free to reach out to me for collaboration, job opportunities, or just to say hello!</p>
+    
+    <div class="contact-content">
+      <div class="contact-info">
+        <div class="contact-item" [@slideIn]="{ value: animationState, params: { delay: 0.1 } }">
+            <div class="icon"><i class="fa fa-envelope"></i></div>
+            <div class="info">
+              <h3>Email</h3>
+              <a href="mailto:marwenfeki214&#64;gmail.com">marwenfeki214&#64;gmail.com</a>
+            </div>
+          </div>          
+        
+        <div class="contact-item" [@slideIn]="{ value: animationState, params: { delay: 0.2 } }">
+          <div class="icon"><i class="fa fa-phone"></i></div>
+          <div class="info">
+            <h3>Phone</h3>
+            <p>+216 52 423 987</p>
+          </div>
+        </div>
+        
+        <div class="contact-item" [@slideIn]="{ value: animationState, params: { delay: 0.3 } }">
+          <div class="icon"><i class="fa fa-map-marker"></i></div>
+          <div class="info">
+            <h3>Location</h3>
+            <p>Tunis, Tunisia</p>
+          </div>
+        </div>
+        
+        <div class="social-links" [@slideIn]="{ value: animationState, params: { delay: 0.4 } }">
+          <h3>Connect With Me</h3>
+          <div class="social-icons">
+            <a href="https://linkedin.com/in/marwenfeki26" target="_blank" class="social-icon">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/MarwenDev2" target="_blank" class="social-icon">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.instagram.com/marwenfekii/" target="_blank" class="social-icon">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/marwen.feki.692535/" target="_blank" class="social-icon">
+              <i class="fab fa-facebook"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="contact-form" [@slideIn]="{ value: animationState, params: { delay: 0.5 } }">
+        <h3>Send Me a Message</h3>
+        <form (ngSubmit)="sendEmail()" #contactForm="ngForm">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" [(ngModel)]="contactData.name" required placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" name="email" [(ngModel)]="contactData.email" required placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" [(ngModel)]="contactData.subject" required placeholder="Enter subject">
+            </div>
+            <div class="form-group">
+              <label for="message">Your Message</label>
+              <textarea id="message" name="message" rows="5" [(ngModel)]="contactData.message" required placeholder="Enter your message"></textarea>
+            </div>
+            <button type="submit" class="btn submit-btn" [disabled]="!contactForm.form.valid || isSubmitting">
+              <span *ngIf="!isSubmitting">Send Message</span>
+              <span *ngIf="isSubmitting"><i class="fas fa-spinner fa-spin"></i> Sending...</span>
+            </button>
+            
+            <div class="form-feedback" *ngIf="formSubmitted">
+              <div class="success-message" *ngIf="submitSuccess">
+                <i class="fas fa-check-circle"></i> Message sent successfully! I'll get back to you soon.
+              </div>
+              <div class="error-message" *ngIf="!submitSuccess">
+                <i class="fas fa-exclamation-circle"></i> {{errorMessage}}
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
