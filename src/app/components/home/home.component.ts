@@ -80,8 +80,6 @@ export class HomeComponent implements OnInit {
     'GitHub Actions', 'Google Cloud', 'Linux'
   ];
 
-
-  
   // Method to get the corresponding Font Awesome icon for a technology
   getTechIcon(tech: string): string {
     const iconMap: { [key: string]: string } = {
@@ -108,7 +106,6 @@ export class HomeComponent implements OnInit {
     return iconMap[tech] || 'fas fa-code';
   }
 
-
   playingVideoIndex: number | null = null;
 
   togglePlay(videoElement: HTMLVideoElement): void {
@@ -119,14 +116,13 @@ export class HomeComponent implements OnInit {
     }
   }
 
-
-currentSlideIndex: { [key: number]: number } = {};
+  currentSlideIndex: { [key: number]: number } = {};
 
   featuredProjects: Project[] = [
     {
       name: 'United Services - HR Management System',
-      description: 'A full-featured HR management platform built for United Services, enabling administrators to manage employees, departments, and service requests efficiently. The system integrates role-based access, cloud-ready architecture, and Dockerized deployment for scalability.',
-      tags: ['Angular', 'Spring Boot', 'MySQL', 'Docker', 'REST API', 'Bootstrap'],
+      description: 'Full-stack HR platform deployed on private VPS with Docker. Improved routing efficiency by 25% and reduced deployment effort by 30% through automation and Nginx optimization.',
+      tags: ['Angular', 'Spring Boot', 'MySQL', 'Docker', 'Nginx', 'Linux'],
       image: [
         'assets/images/projects/rh1.png',
         'assets/images/projects/rh2.png',
@@ -136,21 +132,19 @@ currentSlideIndex: { [key: number]: number } = {};
       ],
       demoLink: '/assets/videos/united-services-demo.mp4',
       githubLink: 'https://github.com/MarwenDev2/UnitedService-Web'
-    }
-    ,
+    },
     {
-      name: 'TurathAI',
-      description: 'AI-powered cultural tourism platform promoting Tunisia\'s heritage sites with interactive maps and personalized recommendations. Deployed on private cloud infrastructure.',
-      tags: ['Java', 'Angular', 'MySQL', 'Docker', 'Kubernetes', 'Ansible'],
+      name: 'Private Cloud Infrastructure',
+      description: 'Production-grade private cloud using OpenStack and Kubernetes. Automated infrastructure with Ansible and Heat templates, achieving 99%+ service availability.',
+      tags: ['OpenStack', 'Kubernetes', 'Ansible', 'Docker', 'Spring Boot', 'Angular'],
       demoLink: '/assets/videos/TurathAi-DemoVideo.mp4',
       githubLink: 'https://github.com/MarwenDev2/TurathAI-Frontend',
       promoVideo: '/assets/videos/TurathAi-Commerical-Video.mp4'
-      
     },
     {
-      name: 'MatchMate',
-      description: 'Sports facility booking system with a JavaFX desktop client and Symfony web version, improving reservation efficiency with relational database integration.',
-      tags: ['JavaFX', 'Symfony', 'MySQL'],
+      name: 'MatchMate - Sports Reservation System',
+      description: 'Full-stack booking system reducing processing time by 40%. Supports 500+ daily transactions with 99% data consistency across JavaFX and Symfony platforms.',
+      tags: ['Java', 'JavaFX', 'Symfony', 'MySQL', 'Agile', 'Testing'],
       demoLink: '/assets/videos/matchmate-demo.mp4',
       githubLink: 'https://github.com/MarwenDev2/MatchMate-Symfony',
       image: [
@@ -171,16 +165,14 @@ currentSlideIndex: { [key: number]: number } = {};
     }, 100);
 
     setInterval(() => {
-    this.featuredProjects.forEach((project, i) => {
-      if (Array.isArray(project.image)) {
-        this.currentSlideIndex[i] = 
-          ((this.currentSlideIndex[i] || 0) + 1) % project.image.length;
-      }
-    });
-  }, 5000);
+      this.featuredProjects.forEach((project, i) => {
+        if (Array.isArray(project.image)) {
+          this.currentSlideIndex[i] = 
+            ((this.currentSlideIndex[i] || 0) + 1) % project.image.length;
+        }
+      });
+    }, 5000);
   }
-
-  
 
   openVideoDemo(videoUrl: string): void {
     this.videoModal = {

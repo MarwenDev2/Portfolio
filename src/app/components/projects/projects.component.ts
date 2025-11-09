@@ -78,8 +78,8 @@ export class ProjectsComponent implements OnInit, AfterViewChecked {
   projects: Project[] = [
     {
       name: 'United Services - HR Management System',
-      description: 'A complete HR management solution developed for United Services. Built with Angular and Spring Boot, it supports employee CRUD operations, authentication, and document uploads. The app runs in Docker containers and is easily deployable to any cloud platform.',
-      technologies: ['Angular', 'Spring Boot', 'MySQL', 'Docker', 'REST API', 'Bootstrap'],
+      description: 'Developed a comprehensive HR management platform using Spring Boot and Angular, deployed on a private VPS with Docker containerization. Implemented a multi-container setup with Docker Compose and configured Nginx reverse proxy with TLS termination, improving request routing efficiency by 25%. Automated backend deployment scripts on Linux servers, reducing manual deployment effort by over 30% while enhancing system stability and deployment reliability.',
+      technologies: ['Angular', 'Spring Boot', 'MySQL', 'Docker', 'Docker Compose', 'Nginx', 'Linux', 'REST API', 'Bootstrap'],
       image: [
         'assets/images/projects/rh1.png',
         'assets/images/projects/rh2.png',
@@ -89,20 +89,19 @@ export class ProjectsComponent implements OnInit, AfterViewChecked {
       ],
       demoLink: '/assets/videos/united-services-demo.mp4',
       githubLink: 'https://github.com/MarwenDev2/UnitedService-Web'
-    }
-    ,
+    },
     {
-      name: 'TurathAI',
-      description: 'AI-powered cultural tourism platform promoting Tunisia\'s heritage sites with interactive maps and personalized recommendations. Deployed on private cloud infrastructure using Docker, Ansible, and Kubernetes.',
-      technologies: ['Java', 'Angular', 'MySQL', 'Docker', 'Kubernetes', 'Ansible'],
+      name: 'Private Cloud Infrastructure & App Deployment',
+      description: 'Engineered a production-grade private cloud infrastructure from scratch using OpenStack on 7 physical servers. Automated entire deployment lifecycle with Heat templates for VM provisioning and Ansible for Infrastructure-as-Code, deploying a resilient 4-node Kubernetes cluster. Successfully containerized and orchestrated a full-stack application (Spring Boot + Angular + MySQL) using 12+ Kubernetes manifests, implementing automated rolling updates and health checks that ensured 99%+ service availability and self-healing capabilities.',
+      technologies: ['OpenStack', 'Kubernetes', 'Ansible', 'Docker', 'Spring Boot', 'Angular', 'MySQL', 'Heat Templates', 'Infrastructure-as-Code', 'Linux', 'Bash Scripting'],
       promoVideo: '/assets/videos/TurathAi-Commerical-Video.mp4',
       demoLink: '/assets/videos/TurathAi-DemoVideo.mp4',
       githubLink: 'https://github.com/MarwenDev2/TurathAI-Frontend',
     },
     {
-      name: 'MatchMate',
-      description: 'Sports facility booking system with a JavaFX desktop client and Symfony web version, improving reservation efficiency with relational database integration. Created a web version using Symfony framework, making MatchMate accessible across different devices for a seamless experience.',
-      technologies: ['JavaFX', 'Symfony', 'MySQL'],
+      name: 'MatchMate - Sports Facility Reservation System',
+      description: 'Engineered a full-stack reservation system using Java/JavaFX for desktop and Symfony/PHP for web applications, reducing booking processing time by 40% through real-time availability updates. Designed and implemented a unified MySQL database schema supporting 500+ daily transactions with 99% data consistency. Applied Agile methodologies to deliver a production-ready system handling facility management, user authentication, and payment processing with comprehensive testing strategies.',
+      technologies: ['Java', 'JavaFX', 'Symfony', 'PHP', 'MySQL', 'Agile Methodology', 'System Integration', 'Testing'],
       demoLink: '/assets/videos/matchmate-demo.mp4',
       githubLink: 'https://github.com/MarwenDev2/MatchMate-Symfony',
       image: [
