@@ -34,8 +34,8 @@ export class AboutComponent implements OnInit {
   downloadCV(): void {
     // Create a direct link to the CV file with absolute URL
     const link = document.createElement('a');
-    link.href = window.location.origin + '/assets/documents/cv.pdf';
-    link.download = 'Marwen_Feki_CV.pdf'; // Rename the downloaded file
+    link.href = window.location.origin + '/assets/documents/CV_Marwen_Feki.pdf';
+    link.download = 'CV-MarwenFeki.pdf'; // Rename the downloaded file
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     

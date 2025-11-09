@@ -8,9 +8,10 @@ interface Project {
   name: string;
   description: string;
   tags: string[];
-  image?: string;
+  image?: string[] | string;
   demoLink?: string;
   githubLink?: string;
+  promoVideo?: string;
 }
 interface VideoModalState {
   isOpen: boolean;
@@ -73,43 +74,78 @@ export class HomeComponent implements OnInit {
   @ViewChild('videoPlayer') videoPlayerRef!: ElementRef<HTMLVideoElement>;
   
   technologies: string[] = [
-    'Angular', 'React JS', 'Java', 'Spring Boot', 'Symfony', 
-    'Flutter', 'Docker', 'Kubernetes', 'Ansible', 'Terraform',
-    'JavaScript', 'TypeScript', 'PHP', 'C#', 'MySQL'
+    'Angular', 'React', 'Spring Boot', 'Java', 'Symfony',
+    'Node.js', 'TypeScript', 'JavaScript', 'MySQL', 'PostgreSQL',
+    'Docker', 'Kubernetes', 'Ansible', 'Terraform', 'Jenkins',
+    'GitHub Actions', 'Google Cloud', 'Linux'
   ];
+
 
   
   // Method to get the corresponding Font Awesome icon for a technology
   getTechIcon(tech: string): string {
-    const iconMap: {[key: string]: string} = {
+    const iconMap: { [key: string]: string } = {
       'Angular': 'fab fa-angular',
-      'React JS': 'fab fa-react',
+      'React': 'fab fa-react',
+      'Spring Boot': 'fas fa-leaf',
       'Java': 'fab fa-java',
+      'Symfony': 'fab fa-symfony',
+      'Node.js': 'fab fa-node-js',
       'JavaScript': 'fab fa-js',
       'TypeScript': 'fab fa-js',
       'PHP': 'fab fa-php',
-      'Docker': 'fab fa-docker',
-      'C#': 'fab fa-microsoft',
       'MySQL': 'fas fa-database',
+      'PostgreSQL': 'fas fa-database',
+      'Docker': 'fab fa-docker',
       'Kubernetes': 'fas fa-dharmachakra',
       'Ansible': 'fas fa-network-wired',
       'Terraform': 'fas fa-cloud',
-      'Flutter': 'fas fa-mobile-alt',
-      'Spring Boot': 'fas fa-leaf',
-      'Symfony': 'fab fa-symfony'
+      'Jenkins': 'fas fa-cogs',
+      'GitHub Actions': 'fab fa-github',
+      'Google Cloud': 'fas fa-cloud',
+      'Linux': 'fab fa-linux'
     };
-    
-    return iconMap[tech] || '';
+    return iconMap[tech] || 'fas fa-code';
   }
 
+
+  playingVideoIndex: number | null = null;
+
+  togglePlay(videoElement: HTMLVideoElement): void {
+    if (videoElement.paused) {
+      videoElement.play().catch(err => console.warn('Playback error:', err));
+    } else {
+      videoElement.pause();
+    }
+  }
+
+
+currentSlideIndex: { [key: number]: number } = {};
+
   featuredProjects: Project[] = [
+    {
+      name: 'United Services - HR Management System',
+      description: 'A full-featured HR management platform built for United Services, enabling administrators to manage employees, departments, and service requests efficiently. The system integrates role-based access, cloud-ready architecture, and Dockerized deployment for scalability.',
+      tags: ['Angular', 'Spring Boot', 'MySQL', 'Docker', 'REST API', 'Bootstrap'],
+      image: [
+        'assets/images/projects/rh1.png',
+        'assets/images/projects/rh2.png',
+        'assets/images/projects/rh3.png',
+        'assets/images/projects/rh4.png',
+        'assets/images/projects/rh5.png'
+      ],
+      demoLink: '/assets/videos/united-services-demo.mp4',
+      githubLink: 'https://github.com/MarwenDev2/UnitedService-Web'
+    }
+    ,
     {
       name: 'TurathAI',
       description: 'AI-powered cultural tourism platform promoting Tunisia\'s heritage sites with interactive maps and personalized recommendations. Deployed on private cloud infrastructure.',
       tags: ['Java', 'Angular', 'MySQL', 'Docker', 'Kubernetes', 'Ansible'],
-      demoLink: '/assets/videos/TurathAI-Demo.mp4',
+      demoLink: '/assets/videos/TurathAi-DemoVideo.mp4',
       githubLink: 'https://github.com/MarwenDev2/TurathAI-Frontend',
-      image: 'assets/images/projects/turathAI.png'
+      promoVideo: '/assets/videos/TurathAi-Commerical-Video.mp4'
+      
     },
     {
       name: 'MatchMate',
@@ -117,7 +153,13 @@ export class HomeComponent implements OnInit {
       tags: ['JavaFX', 'Symfony', 'MySQL'],
       demoLink: '/assets/videos/matchmate-demo.mp4',
       githubLink: 'https://github.com/MarwenDev2/MatchMate-Symfony',
-      image: 'assets/images/projects/matchmate.jpg'
+      image: [
+        'assets/images/projects/matchmate1.jpg',
+        'assets/images/projects/matchmate2.jpg',
+        'assets/images/projects/matchmate3.png',
+        'assets/images/projects/matchmate4.png',
+        'assets/images/projects/matchmate5.jpg'
+      ],
     }
   ];
 
@@ -127,7 +169,18 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.animationState = 'visible';
     }, 100);
+
+    setInterval(() => {
+    this.featuredProjects.forEach((project, i) => {
+      if (Array.isArray(project.image)) {
+        this.currentSlideIndex[i] = 
+          ((this.currentSlideIndex[i] || 0) + 1) % project.image.length;
+      }
+    });
+  }, 5000);
   }
+
+  
 
   openVideoDemo(videoUrl: string): void {
     this.videoModal = {

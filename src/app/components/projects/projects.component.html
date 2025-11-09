@@ -1,26 +1,62 @@
-<div class="projects-container" [@fadeIn]="animationState">
+<div class="projects-container" [@fadeInUp]="animationState">
   <div class="container">
     <h2>My Projects</h2>
     <p class="section-intro">Here are some of the projects I've worked on, showcasing my skills in full-stack development and cloud technologies.</p>
     
     <div class="projects-grid">
-      <div class="project-card" *ngFor="let project of projects; let i = index" [@cardAnimation]="{ value: animationState, params: { delay: i * 0.15 } }">
+      <div class="project-card" *ngFor="let project of projects; let i = index" [@projectCardAnimation]="{ value: animationState, params: { delay: i * 0.15 } }">
         <div class="project-image">
-          <img [src]="project.image || 'assets/images/project-placeholder.jpg'" [alt]="project.name" class="project-img" />
+          <!-- 👇 If promo video exists, show it -->
+          <ng-container *ngIf="project.promoVideo; else staticImage">
+            <div class="video-wrapper" (click)="$event.stopPropagation()">
+              <video
+                class="project-video"
+                #promoVideo
+                [src]="project.promoVideo"
+                [poster]="'assets/images/projects/turathAI.png'">
+              </video>
+
+              <!-- Custom Play/Pause Overlay -->
+              <div class="video-overlay" (click)="togglePlay(promoVideo); $event.stopPropagation();">
+                <i class="fas" [ngClass]="promoVideo.paused ? 'fa-play-circle' : 'fa-pause-circle'"></i>
+              </div>
+            </div>
+          </ng-container>
+          
+          <!-- 👇 Otherwise fallback -->
+          <ng-template #staticImage>
+            <ng-container *ngIf="project.image instanceof Array; else singleImage">
+              <img 
+                [src]="project.image[currentSlideIndex[i] || 0]"
+                class="project-img"
+                [alt]="project.name" />
+            </ng-container>
+
+            <ng-template #singleImage>
+              <img 
+                [src]="project.image || 'assets/images/project-placeholder.jpg'" 
+                class="project-img"
+                [alt]="project.name" />
+            </ng-template>
+          </ng-template>
+
+
           <div class="project-overlay">
             <div class="project-actions">
-              <a [href]="project.demoLink" *ngIf="project.demoLink && project.demoLink.endsWith('.mp4')" class="project-action demo" title="Watch Demo" (click)="$event.preventDefault(); openVideoDemo(project.demoLink)">
+              <!-- 👇 Promo video -->
+              <a *ngIf="project.promoVideo" class="project-action demo" title="Watch Promo"
+                 (click)="$event.preventDefault(); openVideoDemo(project.promoVideo)">
                 <i class="fas fa-play-circle"></i>
               </a>
-              <a [href]="project.demoLink" *ngIf="project.demoLink && project.demoLink !== '#' && !project.demoLink.endsWith('.mp4')" class="project-action demo" target="_blank" title="Live Demo">
-                <i class="fas fa-external-link-alt"></i>
-              </a>
-              <a [href]="project.githubLink" *ngIf="project.githubLink && project.githubLink !== '#'" class="project-action github" target="_blank" title="GitHub Repository">
+
+              <!-- 👇 GitHub -->
+              <a [href]="project.githubLink" *ngIf="project.githubLink" class="project-action github" target="_blank" title="GitHub Repository">
                 <i class="fab fa-github"></i>
               </a>
             </div>
           </div>
         </div>
+
         <div class="project-details">
           <h3>{{ project.name }}</h3>
           <p class="project-description">{{ project.description }}</p>
@@ -33,13 +69,11 @@
           </div>
           
           <div class="project-links">
-            <a [href]="project.demoLink" *ngIf="project.demoLink && project.demoLink.endsWith('.mp4')" class="btn demo" (click)="$event.preventDefault(); openVideoDemo(project.demoLink)">
+            <a *ngIf="project.demoLink" class="btn demo" title="Watch Demo"
+               (click)="$event.preventDefault(); openVideoDemo(project.demoLink)">
               <i class="fas fa-play"></i> Watch Demo
             </a>
-            <a [href]="project.demoLink" *ngIf="project.demoLink && project.demoLink !== '#' && !project.demoLink.endsWith('.mp4')" class="btn demo" target="_blank">
-              <i class="fas fa-external-link-alt"></i> Live Demo
-            </a>
-            <a [href]="project.githubLink" *ngIf="project.githubLink && project.githubLink !== '#'" class="btn github" target="_blank">
+            <a [href]="project.githubLink" *ngIf="project.githubLink" target="_blank" class="btn github">
               <i class="fab fa-github"></i> View Code
             </a>
           </div>
@@ -48,17 +82,17 @@
     </div>
   </div>
 
-<!-- Video Modal -->
-<div class="video-modal" *ngIf="videoModal.isOpen">
-  <div class="modal-overlay" (click)="closeVideoModal()"></div>
-  <div class="modal-content">
-    <button class="close-button" (click)="closeVideoModal()">
-      <i class="fas fa-times"></i>
-    </button>
-    <video controls #videoPlayer>
-      <source [src]="sanitizedVideoUrl" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+  <!-- 🎬 Video Modal -->
+  <div class="video-modal" *ngIf="videoModal.isOpen">
+    <div class="modal-overlay" (click)="closeVideoModal()"></div>
+    <div class="modal-content">
+      <button class="close-button" (click)="closeVideoModal()">
+        <i class="fas fa-times"></i>
+      </button>
+      <video controls #videoPlayer>
+        <source [src]="sanitizedVideoUrl" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
   </div>
-</div>
 </div>

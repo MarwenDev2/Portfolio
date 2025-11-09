@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 interface Project {
@@ -9,7 +9,8 @@ interface Project {
   technologies: string[];
   demoLink?: string;
   githubLink?: string;
-  image?: string;
+  image?: string[] | string;
+  promoVideo?: string;
 }
 
 interface VideoModalState {
@@ -24,15 +25,43 @@ interface VideoModalState {
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
   animations: [
-    trigger('fadeIn', [
-      state('initial', style({ opacity: 0 })),
-      state('visible', style({ opacity: 1 })),
-      transition('initial => visible', animate('0.8s ease-in'))
-    ]),
-    trigger('cardAnimation', [
+    trigger('fadeInUp', [
       state('initial', style({ opacity: 0, transform: 'translateY(30px)' })),
       state('visible', style({ opacity: 1, transform: 'translateY(0)' })),
-      transition('initial => visible', animate('0.5s {{delay}}s ease-out')),
+      transition('initial => visible', animate('0.6s ease'))
+    ]),
+    trigger('slideIn', [
+      state('initial', style({ opacity: 0, transform: 'translateX(50px)' })),
+      state('visible', style({ opacity: 1, transform: 'translateX(0)' })),
+      transition('initial => visible', animate('0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94)'))
+    ]),
+    trigger('techIconAnimation', [
+      state('initial', style({ opacity: 0, transform: 'scale(0.8)' })),
+      state('visible', style({ opacity: 1, transform: 'scale(1)' })),
+      transition('initial => visible', 
+        animate('0.5s {{delay}}s ease-in-out', style({ opacity: 1, transform: 'scale(1)' })),
+        { params: { delay: 0 } }
+      )
+    ]),
+    trigger('projectCardAnimation', [
+      state('initial', style({ opacity: 0, transform: 'translateY(40px)' })),
+      state('visible', style({ opacity: 1, transform: 'translateY(0)' })),
+      transition('initial => visible', 
+        animate('0.6s {{delay}}s ease', style({ opacity: 1, transform: 'translateY(0)' })),
+        { params: { delay: 0 } }
+      )
+    ]),
+    trigger('typewriterAnimation', [
+      state('initial', style({ opacity: 0 })),
+      state('visible', style({ opacity: 1 })),
+      transition('initial => visible', [
+        animate('0.4s', style({ opacity: 1 })),
+        animate('1.5s', keyframes([
+          style({ width: '0%', borderRight: '3px solid var(--primary)', offset: 0 }),
+          style({ width: '100%', borderRight: '3px solid var(--primary)', offset: 0.9 }),
+          style({ borderRight: 'transparent', offset: 1 })
+        ]))
+      ])
     ])
   ]
 })
@@ -48,12 +77,27 @@ export class ProjectsComponent implements OnInit, AfterViewChecked {
   
   projects: Project[] = [
     {
+      name: 'United Services - HR Management System',
+      description: 'A complete HR management solution developed for United Services. Built with Angular and Spring Boot, it supports employee CRUD operations, authentication, and document uploads. The app runs in Docker containers and is easily deployable to any cloud platform.',
+      technologies: ['Angular', 'Spring Boot', 'MySQL', 'Docker', 'REST API', 'Bootstrap'],
+      image: [
+        'assets/images/projects/rh1.png',
+        'assets/images/projects/rh2.png',
+        'assets/images/projects/rh3.png',
+        'assets/images/projects/rh4.png',
+        'assets/images/projects/rh5.png'
+      ],
+      demoLink: '/assets/videos/united-services-demo.mp4',
+      githubLink: 'https://github.com/MarwenDev2/UnitedService-Web'
+    }
+    ,
+    {
       name: 'TurathAI',
       description: 'AI-powered cultural tourism platform promoting Tunisia\'s heritage sites with interactive maps and personalized recommendations. Deployed on private cloud infrastructure using Docker, Ansible, and Kubernetes.',
       technologies: ['Java', 'Angular', 'MySQL', 'Docker', 'Kubernetes', 'Ansible'],
-      demoLink: '/assets/videos/TurathAI-Demo.mp4',
+      promoVideo: '/assets/videos/TurathAi-Commerical-Video.mp4',
+      demoLink: '/assets/videos/TurathAi-DemoVideo.mp4',
       githubLink: 'https://github.com/MarwenDev2/TurathAI-Frontend',
-      image: '/assets/images/projects/turathAI.png'
     },
     {
       name: 'MatchMate',
@@ -61,18 +105,44 @@ export class ProjectsComponent implements OnInit, AfterViewChecked {
       technologies: ['JavaFX', 'Symfony', 'MySQL'],
       demoLink: '/assets/videos/matchmate-demo.mp4',
       githubLink: 'https://github.com/MarwenDev2/MatchMate-Symfony',
-      image: '/assets/images/projects/matchmate.jpg'
+      image: [
+        'assets/images/projects/matchmate1.jpg',
+        'assets/images/projects/matchmate2.jpg',
+        'assets/images/projects/matchmate3.png',
+        'assets/images/projects/matchmate4.png',
+        'assets/images/projects/matchmate5.jpg'
+      ],
     }
   ];
 
   constructor(private sanitizer: DomSanitizer) {}
 
-  ngOnInit(): void {
-    // Trigger animations after component initialized
-    setTimeout(() => {
-      this.animationState = 'visible';
-    }, 100);
+  playingVideoIndex: number | null = null;
+
+  togglePlay(videoElement: HTMLVideoElement): void {
+    if (videoElement.paused) {
+      videoElement.play().catch(err => console.warn('Playback error:', err));
+    } else {
+      videoElement.pause();
+    }
   }
+
+  currentSlideIndex: { [key: number]: number } = {};
+
+  ngOnInit(): void {
+  setTimeout(() => (this.animationState = 'visible'), 100);
+
+  setInterval(() => {
+    this.projects.forEach((project, i) => {
+      if (Array.isArray(project.image)) {
+        this.currentSlideIndex[i] =
+          ((this.currentSlideIndex[i] || 0) + 1) % project.image.length;
+      }
+    });
+  }, 5000);
+}
+
+
   
   ngAfterViewChecked(): void {
     // Check if video player should be playing
