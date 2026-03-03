@@ -9,8 +9,13 @@ interface Project {
   technologies: string[];
   demoLink?: string;
   githubLink?: string;
+  repos?: {
+    frontend?: string;
+    backend?: string;
+  };
   image?: string[] | string;
   promoVideo?: string;
+  isRepoMenuOpen?: boolean;
 }
 
 interface VideoModalState {
@@ -83,7 +88,10 @@ export class ProjectsComponent implements OnInit, AfterViewChecked {
       technologies: ['OpenStack', 'Kubernetes', 'Ansible', 'Docker', 'Spring Boot', 'Angular', 'MySQL', 'Heat Templates', 'Infrastructure-as-Code', 'Linux', 'Bash Scripting'],
       promoVideo: '/assets/videos/TurathAi-Commerical-Video.mp4',
       demoLink: '/assets/videos/TurathAi-DemoVideo.mp4',
-      githubLink: 'https://github.com/MarwenDev2/TurathAI-Frontend',
+      repos: {
+        frontend: 'https://github.com/MarwenDev2/TurathAI-Frontend',
+        backend: 'https://github.com/MarwenDev2/TurathAI-Backend'
+      }
     },
     {
       name: 'United Services - HR Management System',
@@ -97,7 +105,10 @@ export class ProjectsComponent implements OnInit, AfterViewChecked {
         'assets/images/projects/rh5.png'
       ],
       demoLink: '/assets/videos/united-services-demo.mp4',
-      githubLink: 'https://github.com/MarwenDev2/UnitedService-Web'
+      repos: {
+        frontend: 'https://github.com/MarwenDev2/UnitedService-Web',
+        backend: 'https://github.com/MarwenDev2/UnitedService-Backend'
+      }
     },
     {
       name: 'MatchMate - Sports Facility Reservation System',
@@ -140,9 +151,25 @@ export class ProjectsComponent implements OnInit, AfterViewChecked {
       }
     });
   }, 5000);
+
+  document.addEventListener('click', () => {
+    this.closeAllRepoMenus();
+  });
 }
 
+  toggleRepoMenu(project: Project, event: Event): void {
+  event.stopPropagation();
 
+  this.projects.forEach(p => {
+    if (p !== project) p.isRepoMenuOpen = false;
+  });
+
+  project.isRepoMenuOpen = !project.isRepoMenuOpen;
+}
+
+closeAllRepoMenus(): void {
+  this.projects.forEach(p => p.isRepoMenuOpen = false);
+}
   
   ngAfterViewChecked(): void {
     // Check if video player should be playing

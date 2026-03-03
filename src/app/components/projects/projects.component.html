@@ -73,9 +73,45 @@
                (click)="$event.preventDefault(); openVideoDemo(project.demoLink)">
               <i class="fas fa-play"></i> Watch Demo
             </a>
-            <a [href]="project.githubLink" *ngIf="project.githubLink" target="_blank" class="btn github">
+            <!-- SINGLE REPO -->
+            <a *ngIf="project.githubLink"
+              [href]="project.githubLink"
+              target="_blank"
+              class="btn github">
               <i class="fab fa-github"></i> View Code
             </a>
+
+            <!-- MULTIPLE REPOS -->
+            <div *ngIf="project.repos" class="repo-button-wrapper">
+
+              <button class="btn github"
+                      (click)="toggleRepoMenu(project, $event)">
+                <i class="fab fa-github"></i>
+                View Code
+                <i class="fas fa-chevron-down arrow"
+                  [class.rotate]="project.isRepoMenuOpen"></i>
+              </button>
+
+              <div class="repo-dropdown"
+                  *ngIf="project.isRepoMenuOpen">
+
+                <a *ngIf="project.repos.frontend"
+                  [href]="project.repos.frontend"
+                  target="_blank"
+                  class="repo-link">
+                  Frontend Repository
+                </a>
+
+                <a *ngIf="project.repos.backend"
+                  [href]="project.repos.backend"
+                  target="_blank"
+                  class="repo-link">
+                  Backend Repository
+                </a>
+
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
