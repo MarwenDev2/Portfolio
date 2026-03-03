@@ -1,7 +1,42 @@
-<!-- Modern Portfolio with Animation -->
+<!-- Modern Single-Page Portfolio with Smooth Scrolling -->
+
+<!-- Live Background Container -->
+<div class="live-background">
+  <div class="bg-layer-1"></div>
+  <div class="bg-layer-2"></div>
+</div>
 
 <app-navbar></app-navbar>
 
-<div class="main-content">
-  <router-outlet></router-outlet>
-</div>
+<main class="main-content">
+  <!-- Home Section -->
+  <section id="home" class="section home-section">
+    <app-home></app-home>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section about-section">
+    <app-about></app-about>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section projects-section">
+    <app-projects></app-projects>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section contact-section">
+    <app-contact></app-contact>
+  </section>
+</main>
+
+<!-- Footer -->
+<app-footer></app-footer>
+
+<!-- Scroll Progress Indicator -->
+<div class="scroll-progress" [style.width.%]="scrollProgress"></div>
+
+<!-- Back to Top Button -->
+<button class="back-to-top" [class.visible]="showBackToTop" (click)="scrollToTop()" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>

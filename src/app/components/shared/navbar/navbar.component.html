@@ -1,9 +1,9 @@
 <nav class="navbar" [class.scrolled]="scrolled">
   <div class="container">
     <div class="logo" [@logoAnimation]="animationState">
-      <a routerLink="/" class="logo-link">
+      <a href="#home" class="logo-link" (click)="scrollToSection('home')">
         <span class="logo-text">Marwen<span class="logo-accent">Feki</span></span>
-        <span class="logo-subtitle">Software Developer</span>
+        <span class="logo-subtitle">DevOps & Cloud Engineer</span>
       </a>
     </div>
     
@@ -16,10 +16,12 @@
     </div>
     
     <ul class="nav-links" [class.open]="menuOpen" [@navLinksAnimation]="animationState">
-      <li><a routerLink="/home" routerLinkActive="active" class="nav-link" (click)="navigateTo('/home')">Home</a></li>
-      <li><a routerLink="/about" routerLinkActive="active" class="nav-link" (click)="navigateTo('/about')">About</a></li>
-      <li><a routerLink="/projects" routerLinkActive="active" class="nav-link" (click)="navigateTo('/projects')">Projects</a></li>
-      <li><a routerLink="/contact" routerLinkActive="active" class="nav-link" (click)="navigateTo('/contact')">Contact</a></li>
+      <li><a href="#home" class="nav-link" (click)="scrollToSection('home')">Home</a></li>
+      <li><a href="#about-me" class="nav-link" (click)="scrollToSection('about-me')">About Me</a></li>
+      <li><a href="#work-experience" class="nav-link" (click)="scrollToSection('work-experience')">Work Experience</a></li>
+      <li><a href="#education" class="nav-link" (click)="scrollToSection('education')">Education</a></li>
+      <li><a href="#projects" class="nav-link" (click)="scrollToSection('projects')">Projects</a></li>
+      <li><a href="#contact" class="nav-link" (click)="scrollToSection('contact')">Contact</a></li>
       
       <li class="social-links">
         <a href="https://github.com/MarwenDev2" target="_blank" aria-label="GitHub Profile">

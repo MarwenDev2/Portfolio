@@ -1,22 +1,15 @@
-<section class="home-container">
+<section class="home-container animate-on-scroll">
   <div class="hero">
-    <div class="hero-content" [@fadeInUp]="animationState">
-      <div class="greeting" [@typewriterAnimation]="animationState">Hi there, I'm</div>
-      <h1 class="title">Marwen <span class="highlight">Feki</span> <span class="wave">👋</span></h1>
-      <h2 class="subtitle">Software Developer | DevOps/Cloud Computing Engineering Student</h2>
-      <p class="description">
-        I’m a passionate <strong>Software Developer</strong> and <strong>DevOps/Cloud Computing Engineering student</strong> who enjoys building scalable, efficient, and visually engaging applications. 
-        With hands-on experience in <strong>Angular</strong>, <strong>Spring Boot</strong>, and <strong>Symfony</strong>, I focus on delivering seamless full-stack solutions. 
-        I’m also exploring the DevOps and Cloud ecosystem — from containerization with <strong>Docker</strong> and <strong>Kubernetes</strong> to infrastructure automation with <strong>Ansible</strong> and <strong>Terraform</strong>. 
-        My goal is to craft reliable software that bridges development and cloud operations.
-      </p>
-
-      <div class="cta-buttons">
-        <a routerLink="/projects" class="btn primary">
-          <i class="fas fa-code"></i> View My Work
+    <div class="hero-content animate-on-scroll delay-1">
+      <h1 class="title animate-on-scroll delay-2">Marwen <span class="highlight">Feki</span> <span class="wave">👋</span></h1>
+      <h2 class="subtitle animate-on-scroll delay-3">Software Engineering Intern &#64; Airbus | Cloud & DevOps Engineer</h2>
+      
+      <div class="cta-buttons animate-on-scroll delay-4">
+        <a href="#about" class="btn primary">
+          <i class="fas fa-user"></i> About Me
         </a>
-        <a routerLink="/contact" class="btn secondary">
-          <i class="fas fa-envelope"></i> Contact Me
+        <a href="#projects" class="btn secondary">
+          <i class="fas fa-code"></i> View My Work
         </a>
         <a href="https://github.com/MarwenDev2" target="_blank" class="btn github">
           <i class="fab fa-github"></i> GitHub
@@ -24,7 +17,7 @@
       </div>
     </div>
 
-    <div class="hero-image" [@slideIn]="animationState">
+    <div class="hero-image animate-on-scroll delay-3">
       <div class="profile-image-container">
         <img src="/assets/images/ME.png" alt="Marwen Feki" class="profile-image" />
         <div class="image-backdrop"></div>
@@ -34,22 +27,10 @@
     </div>
   </div>
 
-  <div class="tech-stack" [@fadeInUp]="animationState">
-    <h3>Technologies I Work With</h3>
-    <div class="tech-icons">
-      <div class="tech-icon" *ngFor="let tech of technologies; let i = index" [@techIconAnimation]="{value: animationState, params: {delay: i * 0.1}}">
-        <div class="icon-container">
-          <i *ngIf="getTechIcon(tech)" [class]="getTechIcon(tech)"></i>
-          <span>{{ tech }}</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="featured-projects" [@fadeInUp]="animationState">
+  <div class="featured-projects animate-on-scroll delay-5">
     <h3>Featured Projects</h3>
     <div class="project-cards">
-      <div class="project-card" *ngFor="let project of featuredProjects; let i = index" [@projectCardAnimation]="{value: animationState, params: {delay: i * 0.15}}">
+      <div class="project-card animate-on-scroll" *ngFor="let project of featuredProjects; let i = index" [style.animation-delay]="(i * 0.15) + 's'">
         
         <div class="project-image">
           <ng-container *ngIf="project.promoVideo; else staticImage">
@@ -61,26 +42,21 @@
                 [poster]="'assets/images/projects/turathAI.png'">
               </video>
 
-              <!-- Custom Play/Pause Overlay -->
               <div class="video-overlay" (click)="togglePlay(promoVideo); $event.stopPropagation();">
                 <i class="fas" [ngClass]="promoVideo.paused ? 'fa-play-circle' : 'fa-pause-circle'"></i>
               </div>
             </div>
           </ng-container>
 
-          <!-- In home.component.html, replace the ng-template #staticImage section: -->
           <ng-template #staticImage>
-            <ng-container *ngIf="project.image instanceof Array;">
+            <ng-container *ngIf="project.image && project.image.length > 0">
               <img 
                 [src]="project.image[currentSlideIndex[i] || 0]"
                 class="project-img"
                 [alt]="project.name" />
             </ng-container>
-
-          
           </ng-template>
 
-          <!-- Keep GitHub button overlay separate -->
           <div class="project-overlay" (click)="$event.stopPropagation()">
             <div class="project-links">
               <a *ngIf="project.githubLink"
@@ -94,15 +70,15 @@
             </div>
           </div>
         </div>
-
-
-
+        <br>
         <div class="project-content">
           <h4>{{ project.name }}</h4>
           <p>{{ project.description }}</p>
+          <br>
           <div class="project-tags">
             <span *ngFor="let tag of project.tags">{{ tag }}</span>
           </div>
+          <br>
           <div class="project-buttons">
             <a *ngIf="project.demoLink" class="btn demo" title="Watch Demo"
                (click)="$event.preventDefault(); openVideoDemo(project.demoLink)">
@@ -112,12 +88,13 @@
               <i class="fab fa-github"></i> Repository
             </a>
           </div>
+          <br>
         </div>
       </div>
     </div>
     
     <div class="view-more">
-      <a routerLink="/projects" class="btn outline">
+      <a href="#projects" class="btn outline">
         <i class="fas fa-th-large"></i> View All Projects
       </a>
     </div>

@@ -1,10 +1,10 @@
-<div class="contact-container" [@fadeIn]="animationState">
-    <h2>Contact Me</h2>
-    <p class="section-intro">Feel free to reach out to me for collaboration, job opportunities, or just to say hello!</p>
+<div class="contact-container animate-on-scroll">
+    <h2 class="animate-on-scroll delay-1">Contact Me</h2>
+    <p class="section-intro animate-on-scroll delay-2">Feel free to reach out to me for collaboration, job opportunities, or just to say hello!</p>
     
     <div class="contact-content">
       <div class="contact-info">
-        <div class="contact-item" [@slideIn]="{ value: animationState, params: { delay: 0.1 } }">
+        <div class="contact-item animate-on-scroll delay-3">
             <div class="icon"><i class="fa fa-envelope"></i></div>
             <div class="info">
               <h3>Email</h3>
@@ -12,23 +12,23 @@
             </div>
           </div>          
         
-        <div class="contact-item" [@slideIn]="{ value: animationState, params: { delay: 0.2 } }">
+        <div class="contact-item animate-on-scroll delay-4">
           <div class="icon"><i class="fa fa-phone"></i></div>
           <div class="info">
             <h3>Phone</h3>
-            <p>+49 176 59733312</p>
+            <p>+49 163 2328812</p>
           </div>
         </div>
         
-        <div class="contact-item" [@slideIn]="{ value: animationState, params: { delay: 0.3 } }">
+        <div class="contact-item animate-on-scroll delay-5">
           <div class="icon"><i class="fa fa-map-marker"></i></div>
           <div class="info">
             <h3>Location</h3>
-            <p>Ilmenau, Germany</p>
+            <p>Max-Planck-Ring 10, 98693 Ilmenau, Germany</p>
           </div>
         </div>
         
-        <div class="social-links" [@slideIn]="{ value: animationState, params: { delay: 0.4 } }">
+        <div class="social-links animate-on-scroll delay-6">
           <h3>Connect With Me</h3>
           <div class="social-icons">
             <a href="https://linkedin.com/in/marwenfeki26" target="_blank" class="social-icon">
@@ -47,7 +47,7 @@
         </div>
       </div>
       
-      <div class="contact-form" [@slideIn]="{ value: animationState, params: { delay: 0.5 } }">
+      <div class="contact-form animate-on-scroll delay-7">
         <h3>Send Me a Message</h3>
         <form (ngSubmit)="sendEmail()" #contactForm="ngForm">
             <div class="form-group">

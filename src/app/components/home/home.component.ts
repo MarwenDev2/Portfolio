@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
@@ -22,12 +21,12 @@ interface VideoModalState {
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   animations: [
     trigger('fadeInUp', [
       state('initial', style({ opacity: 0, transform: 'translateY(30px)' })),
       state('visible', style({ opacity: 1, transform: 'translateY(0)' })),
-      transition('initial => visible', animate('0.6s ease'))
+      transition('initial => visible', animate('500ms cubic-bezier(0.16, 1, 0.3, 1)'))
     ]),
     trigger('slideIn', [
       state('initial', style({ opacity: 0, transform: 'translateX(50px)' })),
@@ -120,9 +119,17 @@ export class HomeComponent implements OnInit {
 
   featuredProjects: Project[] = [
     {
+      name: 'Private Cloud Infrastructure',
+      description: 'Production-grade private cloud using OpenStack and Kubernetes. Automated infrastructure with Ansible and Heat templates, achieving 99%+ service availability.',
+      tags: ['OpenStack, ', ' Kubernetes, ', ' Ansible, ', ' Docker, ', ' Spring Boot, ', ' Angular '],
+      demoLink: '/assets/videos/TurathAi-DemoVideo.mp4',
+      githubLink: 'https://github.com/MarwenDev2/TurathAI-Frontend',
+      promoVideo: '/assets/videos/TurathAi-Commerical-Video.mp4'
+    },
+    {
       name: 'United Services - HR Management System',
       description: 'Full-stack HR platform deployed on private VPS with Docker. Improved routing efficiency by 25% and reduced deployment effort by 30% through automation and Nginx optimization.',
-      tags: ['Angular', 'Spring Boot', 'MySQL', 'Docker', 'Nginx', 'Linux'],
+      tags: ['Angular, ', 'Spring Boot, ', 'MySQL, ', 'Docker, ', 'Nginx, ', 'Linux '],
       image: [
         'assets/images/projects/rh1.png',
         'assets/images/projects/rh2.png',
@@ -132,28 +139,6 @@ export class HomeComponent implements OnInit {
       ],
       demoLink: '/assets/videos/united-services-demo.mp4',
       githubLink: 'https://github.com/MarwenDev2/UnitedService-Web'
-    },
-    {
-      name: 'Private Cloud Infrastructure',
-      description: 'Production-grade private cloud using OpenStack and Kubernetes. Automated infrastructure with Ansible and Heat templates, achieving 99%+ service availability.',
-      tags: ['OpenStack', 'Kubernetes', 'Ansible', 'Docker', 'Spring Boot', 'Angular'],
-      demoLink: '/assets/videos/TurathAi-DemoVideo.mp4',
-      githubLink: 'https://github.com/MarwenDev2/TurathAI-Frontend',
-      promoVideo: '/assets/videos/TurathAi-Commerical-Video.mp4'
-    },
-    {
-      name: 'MatchMate - Sports Reservation System',
-      description: 'Full-stack booking system reducing processing time by 40%. Supports 500+ daily transactions with 99% data consistency across JavaFX and Symfony platforms.',
-      tags: ['Java', 'JavaFX', 'Symfony', 'MySQL', 'Agile', 'Testing'],
-      demoLink: '/assets/videos/matchmate-demo.mp4',
-      githubLink: 'https://github.com/MarwenDev2/MatchMate-Symfony',
-      image: [
-        'assets/images/projects/matchmate1.jpg',
-        'assets/images/projects/matchmate2.jpg',
-        'assets/images/projects/matchmate3.png',
-        'assets/images/projects/matchmate4.png',
-        'assets/images/projects/matchmate5.jpg'
-      ],
     }
   ];
 

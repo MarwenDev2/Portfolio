@@ -1,10 +1,10 @@
-<div class="projects-container" [@fadeInUp]="animationState">
+<div class="projects-container animate-on-scroll">
   <div class="container">
-    <h2>My Projects</h2>
-    <p class="section-intro">Here are some of the projects I've worked on, showcasing my skills in full-stack development and cloud technologies.</p>
+    <h2 class="animate-on-scroll delay-1">My Projects</h2>
+    <p class="section-intro animate-on-scroll delay-2">Here are some of the projects I've worked on, showcasing my skills in full-stack development and cloud technologies.</p>
     
     <div class="projects-grid">
-      <div class="project-card" *ngFor="let project of projects; let i = index" [@projectCardAnimation]="{ value: animationState, params: { delay: i * 0.15 } }">
+      <div class="project-card animate-on-scroll" *ngFor="let project of projects; let i = index" [style.animation-delay]="(i * 0.15) + 's'">
         <div class="project-image">
           <!-- 👇 If promo video exists, show it -->
           <ng-container *ngIf="project.promoVideo; else staticImage">
@@ -25,7 +25,7 @@
           
           <!-- 👇 Otherwise fallback -->
           <ng-template #staticImage>
-            <ng-container *ngIf="project.image instanceof Array; else singleImage">
+            <ng-container *ngIf="project.image && project.image.length > 0; else singleImage">
               <img 
                 [src]="project.image[currentSlideIndex[i] || 0]"
                 class="project-img"

@@ -1,89 +1,87 @@
-<div class="about-container" [@fadeIn]="animationState">
-  <section class="about-me">
+<div class="about-container">
+  <!-- About Me Section -->
+  <section id="about-me" class="about-section animate-on-scroll">
     <h2>About Me</h2>
     <div class="about-content">
-      <div class="about-text">
-        <p>I'm <strong>Marwen Feki</strong>, a final-year <strong>Cloud and DevOps Engineering</strong> student at <strong>ESPRIT</strong>, currently completing an exchange semester at <strong>Technische Universität Ilmenau</strong> in Germany.</p>
-        <p>I’m passionate about building scalable, secure, and cloud-ready applications that bridge strong backend architecture with clean and responsive frontend design. My focus is on <strong>Full Stack Development</strong>, <strong>Cloud Infrastructure</strong>, and <strong>DevOps Automation</strong>.</p>
-        <p>I enjoy transforming ideas into efficient solutions using modern technologies — from deploying APIs and containers to orchestrating microservices with Kubernetes.</p>
+      <div class="about-text animate-on-scroll delay-2">
+        <p>
+I'm <strong>Marwen Feki</strong>, a Cloud & DevOps Engineering student at <strong>ESPRIT</strong>, 
+currently completing an exchange semester at <strong>Technische Universität Ilmenau</strong>, Germany.
+</p>
+
+<p>
+I am currently working as a <strong>Software Engineering Intern at Airbus</strong>, where I contribute to enterprise-grade software systems and development processes in a highly structured and quality-driven environment.
+</p>
+
+<p>
+My core expertise lies in full-stack engineering and cloud infrastructure. I design backend services with Spring Boot, develop responsive frontend applications using Angular, and deploy distributed systems using Docker, Kubernetes, and Infrastructure-as-Code tools such as Ansible and Terraform.
+</p>
+
+<p>
+I focus on reliability, automation, scalability, and clean architecture building systems that are not only functional, but resilient and production-ready.
+</p>
         
-        <div class="cv-download">
+        <div class="cv-download animate-on-scroll delay-3">
           <a (click)="downloadCV()" class="download-btn" role="button" style="cursor: pointer;">
             <i class="fas fa-download"></i> Download CV
           </a>
         </div>
       </div>
-      <div class="about-image">
+      <div class="about-image animate-on-scroll delay-3">
         <img src="/assets/images/ME.png" alt="Marwen Feki" class="profile-picture">
       </div>
     </div>
   </section>
 
-  <section class="education">
-    <h3>Education</h3>
+  <!-- Experience Section -->
+  <section id="work-experience" class="experience-section animate-on-scroll delay-4">
+    <h2>Work Experience</h2>
     <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-date">2025 - Present</div>
+      <div class="timeline-item animate-on-scroll" *ngFor="let exp of experiences; let i = index" [style.animation-delay]="(i * 0.2) + 's'">
+      <div class="timeline-date">{{ exp.date }}</div>
+      <div class="timeline-content">
+        <h4>{{ exp.title }}</h4>
+        <p *ngFor="let desc of exp.description">{{ desc }}</p>
+        <p><strong>Technologies:</strong> {{ exp.technologies }}</p>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education" class="education-section animate-on-scroll delay-5">
+    <h2>Education</h2>
+    <div class="timeline">
+      <div class="timeline-item animate-on-scroll">
+        <div class="timeline-date">Oct 2025 - March 2026</div>
         <div class="timeline-content">
           <h4>Computer Science Engineering - Cloud & DevOps</h4>
           <p>technische universität ilmenau, Germany</p>
           <p>Exchange Semester: Master in Compute Science</p>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-date">2023 - Present</div>
+      <div class="timeline-item animate-on-scroll">
+        <div class="timeline-date">Sep 2023 - Jul 2026</div>
         <div class="timeline-content">
           <h4>Computer Science Engineering - Cloud & DevOps</h4>
-          <p>Private Higher School of Engineering and Technology (ESPRIT), Tunis</p>
+          <p>Private Higher School of Engineering and Technology (ESPRIT), Tunis </p>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-date">2020 - 2023</div>
+      <div class="timeline-item animate-on-scroll">
+        <div class="timeline-date">Sep 2020 - Jun 2023</div>
         <div class="timeline-content">
-          <h4>Bachelor’s Degree in Computer Science Applied to Management</h4>
+          <h4>Bachelor's Degree in Computer Science Applied to Management</h4>
           <p>Faculty of Economics and Management, Sfax</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="experience">
-    <h3>Work Experience</h3>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-date">Jul 2025 - Sep 2025</div>
-        <div class="timeline-content">
-          <h4>Cloud & DevOps Intern - United Services, Tunis</h4>
-          <p>Developed and deployed a full HR management system using Spring Boot and Angular on a private VPS.</p>
-          <p>Automated deployment with Docker Compose, Nginx reverse proxy with TLS, and CI/CD optimization.</p>
-          <p><strong>Technologies:</strong> Spring Boot, Angular, Docker, Nginx, Linux, VPS Deployment</p>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-date">Jul 2024 - Sep 2024</div>
-        <div class="timeline-content">
-          <h4>Engineering Internship - Inetum, Tunis</h4>
-          <p>Customized the WSO2 Developer Portal and API Marketplace to align with enterprise branding standards.</p>
-          <p><strong>Technologies:</strong> REST API, Node.js, React, WSO2 API Manager</p>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-date">Feb 2023 - Jun 2023</div>
-        <div class="timeline-content">
-          <h4>Web Development Intern - Unilog, Sfax</h4>
-          <p>Developed <strong>MeetWise</strong>, a meeting scheduling web app that allows users to set meeting slots, send invitations, and manage responses interactively.</p>
-          <p><strong>Technologies:</strong> Angular, Node.js, MySQL</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="skills">
-    <h3>Technical Skills</h3>
+  <!-- Skills Section -->
+  <section class="skills-section animate-on-scroll delay-6">
+    <h2>Technical Skills</h2>
     <div class="skills-grid">
-      <div class="skill-category">
+      <div class="skill-category animate-on-scroll">
         <h4>Languages</h4>
         <ul>
           <li>Java</li>
@@ -94,7 +92,7 @@
           <li>Dart</li>
         </ul>
       </div>
-      <div class="skill-category">
+      <div class="skill-category animate-on-scroll">
         <h4>Frameworks</h4>
         <ul>
           <li>Spring Boot</li>
@@ -104,7 +102,7 @@
           <li>Flutter</li>
         </ul>
       </div>
-      <div class="skill-category">
+      <div class="skill-category animate-on-scroll">
         <h4>DevOps & Cloud</h4>
         <ul>
           <li>Docker</li>
@@ -114,7 +112,7 @@
           <li>GitLab CI/CD</li>
         </ul>
       </div>
-      <div class="skill-category">
+      <div class="skill-category animate-on-scroll">
         <h4>Databases & Tools</h4>
         <ul>
           <li>MySQL / PostgreSQL</li>
@@ -128,24 +126,25 @@
     </div>
   </section>
 
-  <section class="personal-info">
-    <h3>Personal Information</h3>
+  <!-- Personal Info Section -->
+  <section class="personal-info-section animate-on-scroll delay-7">
+    <h2>Personal Information</h2>
     <div class="info-grid">
-      <div class="info-item">
+      <div class="info-item animate-on-scroll">
         <span class="info-label">Age:</span>
-        <span class="info-value">24 years old</span>
+        <span class="info-value">25 years old</span>
       </div>
-      <div class="info-item">
+      <div class="info-item animate-on-scroll">
         <span class="info-label">Nationality:</span>
         <span class="info-value">Tunisian</span>
       </div>
-      <div class="info-item">
+      <div class="info-item animate-on-scroll">
         <span class="info-label">Location:</span>
         <span class="info-value">Ilmenau, Germany</span>
       </div>
-      <div class="info-item">
+      <div class="info-item animate-on-scroll">
         <span class="info-label">Languages:</span>
-        <span class="info-value">Arabic, English, French</span>
+        <span class="info-value">Arabic, English, French, German</span>
       </div>
     </div>
   </section>

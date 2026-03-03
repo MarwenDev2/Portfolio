@@ -28,7 +28,7 @@ interface VideoModalState {
     trigger('fadeInUp', [
       state('initial', style({ opacity: 0, transform: 'translateY(30px)' })),
       state('visible', style({ opacity: 1, transform: 'translateY(0)' })),
-      transition('initial => visible', animate('0.6s ease'))
+      transition('initial => visible', animate('500ms cubic-bezier(0.16, 1, 0.3, 1)'))
     ]),
     trigger('slideIn', [
       state('initial', style({ opacity: 0, transform: 'translateX(50px)' })),
@@ -77,6 +77,15 @@ export class ProjectsComponent implements OnInit, AfterViewChecked {
   
   projects: Project[] = [
     {
+      name: 'Private Cloud Infrastructure & App Deployment',
+      description: 'Engineered a production-grade private cloud infrastructure from scratch using OpenStack on 7 physical servers. Automated entire deployment lifecycle with Heat templates for VM provisioning and Ansible for Infrastructure-as-Code, deploying a resilient 4-node Kubernetes cluster. Successfully containerized and orchestrated a full-stack application (Spring Boot + Angular + MySQL) using 12+ Kubernetes manifests, implementing automated rolling updates and health checks that ensured 99%+ service availability and self-healing capabilities.',
+      
+      technologies: ['OpenStack', 'Kubernetes', 'Ansible', 'Docker', 'Spring Boot', 'Angular', 'MySQL', 'Heat Templates', 'Infrastructure-as-Code', 'Linux', 'Bash Scripting'],
+      promoVideo: '/assets/videos/TurathAi-Commerical-Video.mp4',
+      demoLink: '/assets/videos/TurathAi-DemoVideo.mp4',
+      githubLink: 'https://github.com/MarwenDev2/TurathAI-Frontend',
+    },
+    {
       name: 'United Services - HR Management System',
       description: 'Developed a comprehensive HR management platform using Spring Boot and Angular, deployed on a private VPS with Docker containerization. Implemented a multi-container setup with Docker Compose and configured Nginx reverse proxy with TLS termination, improving request routing efficiency by 25%. Automated backend deployment scripts on Linux servers, reducing manual deployment effort by over 30% while enhancing system stability and deployment reliability.',
       technologies: ['Angular', 'Spring Boot', 'MySQL', 'Docker', 'Docker Compose', 'Nginx', 'Linux', 'REST API', 'Bootstrap'],
@@ -89,14 +98,6 @@ export class ProjectsComponent implements OnInit, AfterViewChecked {
       ],
       demoLink: '/assets/videos/united-services-demo.mp4',
       githubLink: 'https://github.com/MarwenDev2/UnitedService-Web'
-    },
-    {
-      name: 'Private Cloud Infrastructure & App Deployment',
-      description: 'Engineered a production-grade private cloud infrastructure from scratch using OpenStack on 7 physical servers. Automated entire deployment lifecycle with Heat templates for VM provisioning and Ansible for Infrastructure-as-Code, deploying a resilient 4-node Kubernetes cluster. Successfully containerized and orchestrated a full-stack application (Spring Boot + Angular + MySQL) using 12+ Kubernetes manifests, implementing automated rolling updates and health checks that ensured 99%+ service availability and self-healing capabilities.',
-      technologies: ['OpenStack', 'Kubernetes', 'Ansible', 'Docker', 'Spring Boot', 'Angular', 'MySQL', 'Heat Templates', 'Infrastructure-as-Code', 'Linux', 'Bash Scripting'],
-      promoVideo: '/assets/videos/TurathAi-Commerical-Video.mp4',
-      demoLink: '/assets/videos/TurathAi-DemoVideo.mp4',
-      githubLink: 'https://github.com/MarwenDev2/TurathAI-Frontend',
     },
     {
       name: 'MatchMate - Sports Facility Reservation System',
