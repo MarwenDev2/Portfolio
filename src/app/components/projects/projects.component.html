@@ -125,10 +125,12 @@
       <button class="close-button" (click)="closeVideoModal()">
         <i class="fas fa-times"></i>
       </button>
-      <video controls #videoPlayer>
-        <source [src]="sanitizedVideoUrl" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <div class="video-frame">
+        <video controls playsinline preload="metadata" #videoPlayer>
+          <source [src]="sanitizedVideoUrl" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
     </div>
   </div>
 </div>

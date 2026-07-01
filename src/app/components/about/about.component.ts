@@ -28,28 +28,32 @@ export class AboutComponent implements OnInit {
       date: 'Apr 2026 - Present',
       title: 'Software Engineering Intern - Airbus, Germany',
       description: [
-        'Contributing to enterprise-level software development within a structured aerospace environment.',
-        'Supporting development workflows, automation pipelines, and system optimization initiatives.',
-        'Collaborating in agile teams while adhering to high standards of code quality, documentation, and reliability.'
+        'Supported CI/CD infrastructure by troubleshooting deployment failures across Linux and Windows environments, analyzing pipeline logs, and resolving integration issues..',
+        'Worked with Jenkins pipelines, automated test environments, and infrastructure components to investigate build, deployment, and configuration failures..',
+        'Developed automation scripts using Python and Bash to simplify repetitive operational tasks, improve deployment workflows, and reduce manual intervention.',
+        'Collaborated with software, integration, and infrastructure engineers to document deployment procedures, support system validation, and improve operational processes.'
       ],
-      technologies: 'CI/CD, Git, Enterprise Development Practices, Cloud & DevOps Tooling'
+      technologies: 'CI/CD, Git, Enterprise Development Practices, Cloud & DevOps Tooling, Linux, Windows, Python, Bash, Jenkins, Docker'
     },
     {
       date: 'Jul 2025 - Sep 2025',
       title: 'Cloud & DevOps Intern - United Services, Tunis',
       description: [
-        'Developed and deployed a full HR management system using Spring Boot and Angular on a private VPS.',
-        'Automated deployment with Docker Compose, Nginx reverse proxy with TLS, and CI/CD optimization.'
+        'Developed and deployed a full-stack application using Spring Boot and Angular, integrating secure REST APIs and backend services.',
+        'Designed and maintained Jenkins CI/CD pipelines to automate build, testing, and deployment processes.',
+        'Configured Nginx as a reverse proxy and load balancer to optimize application performance and scalability.',
+        'Deployed the application on a Linux VPS, managing server configurations, security settings, and monitoring tools.'
       ],
-      technologies: 'Spring Boot, Angular, Docker, Nginx, Linux, VPS Deployment'
+      technologies: 'Spring Boot, Angular, Docker, Nginx, Linux, VPS Deployment, Jenkins CI/CD, REST APIs, Git'
     },
     {
       date: 'Jul 2024 - Sep 2024',
       title: 'Engineering Internship - Inetum, Tunis',
       description: [
-        'Customized the WSO2 Developer Portal and API Marketplace to align with enterprise branding standards.'
+        'Customized and extended enterprise web platforms using WSO2 technologies, Java, and web development tools to meet client requirements.',
+        'Developed and integrated RESTful APIs to enhance platform functionality and enable seamless data exchange between systems.'
       ],
-      technologies: 'REST API, Node.js, React, WSO2 API Manager'
+      technologies: 'REST API, Node.js, React, WSO2 API Manager, WSO2 Identity Server, Java, Web Development'
     },
     {
       date: 'Feb 2023 - Jun 2023',
