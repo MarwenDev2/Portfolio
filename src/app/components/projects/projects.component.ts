@@ -128,17 +128,25 @@ export class ProjectsComponent implements OnInit, AfterViewChecked {
 
   constructor(private sanitizer: DomSanitizer) {}
 
+  sanitizeUrl(url: string) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  isGoogleDriveVideoUrl(videoUrl: string): boolean {
+    return !!videoUrl && /drive\.google\.com/i.test(videoUrl);
+  }
+
   normalizeVideoUrl(videoUrl: string): string {
     if (!videoUrl) return '';
 
     const googleDriveFileMatch = videoUrl.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/i);
     if (googleDriveFileMatch?.[1]) {
-      return `https://drive.google.com/uc?export=view&id=${googleDriveFileMatch[1]}`;
+      return `https://drive.google.com/file/d/${googleDriveFileMatch[1]}/preview`;
     }
 
     const googleDriveUcMatch = videoUrl.match(/[?&]id=([a-zA-Z0-9_-]+)/i);
     if (googleDriveUcMatch?.[1]) {
-      return `https://drive.google.com/uc?export=view&id=${googleDriveUcMatch[1]}`;
+      return `https://drive.google.com/file/d/${googleDriveUcMatch[1]}/preview`;
     }
 
     return videoUrl;
@@ -188,7 +196,7 @@ closeAllRepoMenus(): void {
 }
   
   ngAfterViewChecked(): void {
-    if (!this.videoModal.isOpen || !this.videoPlayerRef?.nativeElement || !this.sanitizedVideoUrl) {
+    if (!this.videoModal.isOpen || this.isGoogleDriveVideoUrl(this.videoModal.videoUrl) || !this.videoPlayerRef?.nativeElement || !this.sanitizedVideoUrl) {
       return;
     }
 
@@ -221,6 +229,7 @@ closeAllRepoMenus(): void {
       isOpen: true,
       videoUrl: normalizedVideoUrl
     };
+
     this.sanitizedVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(normalizedVideoUrl);
     document.body.style.overflow = 'hidden';
   }

@@ -9,16 +9,26 @@
           <!-- 👇 If promo video exists, show it -->
           <ng-container *ngIf="project.promoVideo; else staticImage">
             <div class="video-wrapper" (click)="$event.stopPropagation()">
-              <video
-                class="project-video"
-                #promoVideo
-                [src]="normalizeVideoUrl(project.promoVideo)"
-                [poster]="'assets/images/projects/turathAI.png'">
-              </video>
+              <ng-container *ngIf="isGoogleDriveVideoUrl(project.promoVideo); else nativeProjectVideo">
+                <iframe
+                  class="project-video"
+                  [src]="sanitizeUrl(normalizeVideoUrl(project.promoVideo))"
+                  frameborder="0"
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  allowfullscreen>
+                </iframe>
+              </ng-container>
 
-              <!-- Custom Play/Pause Overlay -->
-              <div class="video-overlay" (click)="togglePlay(promoVideo); $event.stopPropagation();">
-                <i class="fas" [ngClass]="promoVideo.paused ? 'fa-play-circle' : 'fa-pause-circle'"></i>
+              <ng-template #nativeProjectVideo>
+                <video
+                  class="project-video"
+                  [src]="normalizeVideoUrl(project.promoVideo)"
+                  [poster]="'assets/images/projects/turathAI.png'">
+                </video>
+              </ng-template>
+
+              <div class="video-overlay" *ngIf="!isGoogleDriveVideoUrl(project.promoVideo)">
+                <i class="fas fa-play-circle"></i>
               </div>
             </div>
           </ng-container>
@@ -126,10 +136,22 @@
         <i class="fas fa-times"></i>
       </button>
       <div class="video-frame">
-        <video controls playsinline preload="metadata" #videoPlayer>
-          <source [src]="sanitizedVideoUrl" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+        <ng-container *ngIf="isGoogleDriveVideoUrl(videoModal.videoUrl); else nativeVideoModal">
+          <iframe
+            [src]="sanitizeUrl(videoModal.videoUrl)"
+            class="video-frame-embed"
+            frameborder="0"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </ng-container>
+
+        <ng-template #nativeVideoModal>
+          <video controls playsinline preload="metadata" #videoPlayer>
+            <source [src]="sanitizedVideoUrl" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </ng-template>
       </div>
     </div>
   </div>

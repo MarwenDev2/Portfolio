@@ -40,28 +40,41 @@ export class ContactComponent {
   formSubmitted = false;
   submitSuccess = false;
   errorMessage = '';
+  fallbackEmailLink = '';
 
   sendEmail(): void {
     this.isSubmitting = true;
     this.formSubmitted = false;
+    this.errorMessage = '';
+    this.submitSuccess = false;
+    this.fallbackEmailLink = '';
 
     const gmailUrl = this.createGmailLink();
 
     try {
-      window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+      const gmailWindow = window.open(gmailUrl, '_blank', 'noopener,noreferrer');
 
-      this.submitSuccess = true;
-      this.errorMessage = '';
-      setTimeout(() => {
-        this.contactData = {
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        };
-      }, 100);
+      if (gmailWindow) {
+        this.submitSuccess = true;
+        this.errorMessage = '';
+        this.fallbackEmailLink = this.createMailtoLink();
+
+        setTimeout(() => {
+          this.contactData = {
+            name: '',
+            email: '',
+            subject: '',
+            message: ''
+          };
+        }, 250);
+      } else {
+        this.submitSuccess = false;
+        this.fallbackEmailLink = this.createMailtoLink();
+        this.errorMessage = 'Gmail did not open automatically. Please use the email link below to send your message.';
+      }
     } catch (error) {
       this.submitSuccess = false;
+      this.fallbackEmailLink = this.createMailtoLink();
       this.errorMessage = 'Could not open Gmail. Please email me directly at marwenfeki214@gmail.com';
     } finally {
       this.isSubmitting = false;
@@ -80,5 +93,17 @@ export class ContactComponent {
     );
 
     return `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+  }
+
+  private createMailtoLink(): string {
+    const subject = encodeURIComponent(`[Portfolio Contact] ${this.contactData.subject || 'New message'}`);
+    const body = encodeURIComponent(
+      `Name: ${this.contactData.name}\n\n` +
+      `Email: ${this.contactData.email}\n\n` +
+      `Message:\n${this.contactData.message}\n\n` +
+      `Sent from your portfolio website`
+    );
+
+    return `mailto:marwenfeki214@gmail.com?subject=${subject}&body=${body}`;
   }
 }
