@@ -72,7 +72,7 @@ export class AboutComponent implements OnInit {
       title: 'Cloud & Infrastructure',
       icon: 'fas fa-cloud',
       items: [
-        { name: 'AWS', icon: 'fa-brands fa-aws', color: '#ff9900' },
+        { name: 'AWS', icon: 'fab fa-aws', color: '#ff9900' },
         { name: 'Terraform', icon: 'fas fa-server', color: '#7b61ff' },
         { name: 'Ansible', icon: 'fas fa-cogs', color: '#ff6b35' },
         { name: 'OpenStack', icon: 'fas fa-layer-group', color: '#4ecdc4' },
