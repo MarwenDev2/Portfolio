@@ -131,14 +131,14 @@ export class ProjectsComponent implements OnInit, AfterViewChecked {
   normalizeVideoUrl(videoUrl: string): string {
     if (!videoUrl) return '';
 
-    const googleDriveFileMatch = videoUrl.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)\//i);
+    const googleDriveFileMatch = videoUrl.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/i);
     if (googleDriveFileMatch?.[1]) {
-      return `https://drive.google.com/uc?export=download&id=${googleDriveFileMatch[1]}`;
+      return `https://drive.google.com/uc?export=view&id=${googleDriveFileMatch[1]}`;
     }
 
     const googleDriveUcMatch = videoUrl.match(/[?&]id=([a-zA-Z0-9_-]+)/i);
     if (googleDriveUcMatch?.[1]) {
-      return `https://drive.google.com/uc?export=download&id=${googleDriveUcMatch[1]}`;
+      return `https://drive.google.com/uc?export=view&id=${googleDriveUcMatch[1]}`;
     }
 
     return videoUrl;
@@ -188,16 +188,30 @@ closeAllRepoMenus(): void {
 }
   
   ngAfterViewChecked(): void {
-    // Check if video player should be playing
-    if (this.videoModal.isOpen && this.videoPlayerRef) {
-      // Try to play the video
-      setTimeout(() => {
-        const videoElement = this.videoPlayerRef.nativeElement;
-        videoElement.play().catch(error => {
-          console.error('Error playing video:', error);
-        });
-      }, 300);
+    if (!this.videoModal.isOpen || !this.videoPlayerRef?.nativeElement || !this.sanitizedVideoUrl) {
+      return;
     }
+
+    const videoElement = this.videoPlayerRef.nativeElement as HTMLVideoElement;
+    const currentSource = videoElement.currentSrc || videoElement.src;
+    const targetSource = this.normalizeVideoUrl(this.videoModal.videoUrl || '');
+
+    if (targetSource && currentSource !== targetSource) {
+      videoElement.src = targetSource;
+      videoElement.load();
+    }
+
+    setTimeout(() => {
+      if (!videoElement.paused && !videoElement.ended) {
+        return;
+      }
+
+      videoElement.play().catch(error => {
+        if (error?.name !== 'AbortError') {
+          console.error('Error playing video:', error);
+        }
+      });
+    }, 250);
   }
   
   openVideoDemo(videoUrl: string): void {
@@ -207,9 +221,7 @@ closeAllRepoMenus(): void {
       isOpen: true,
       videoUrl: normalizedVideoUrl
     };
-    // Sanitize the URL for Angular security
     this.sanitizedVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(normalizedVideoUrl);
-    // Prevent scrolling when modal is open
     document.body.style.overflow = 'hidden';
   }
   

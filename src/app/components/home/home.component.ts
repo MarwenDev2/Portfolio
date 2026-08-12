@@ -147,14 +147,14 @@ export class HomeComponent implements OnInit {
   normalizeVideoUrl(videoUrl: string): string {
     if (!videoUrl) return '';
 
-    const googleDriveFileMatch = videoUrl.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)\//i);
+    const googleDriveFileMatch = videoUrl.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/i);
     if (googleDriveFileMatch?.[1]) {
-      return `https://drive.google.com/uc?export=download&id=${googleDriveFileMatch[1]}`;
+      return `https://drive.google.com/uc?export=view&id=${googleDriveFileMatch[1]}`;
     }
 
     const googleDriveUcMatch = videoUrl.match(/[?&]id=([a-zA-Z0-9_-]+)/i);
     if (googleDriveUcMatch?.[1]) {
-      return `https://drive.google.com/uc?export=download&id=${googleDriveUcMatch[1]}`;
+      return `https://drive.google.com/uc?export=view&id=${googleDriveUcMatch[1]}`;
     }
 
     return videoUrl;
@@ -182,9 +182,7 @@ export class HomeComponent implements OnInit {
       isOpen: true,
       videoUrl: normalizedVideoUrl
     };
-    // Sanitize the URL for Angular security
     this.sanitizedVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(normalizedVideoUrl);
-    // Prevent scrolling when modal is open
     document.body.style.overflow = 'hidden';
   }
   

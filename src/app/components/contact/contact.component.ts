@@ -44,19 +44,15 @@ export class ContactComponent {
   sendEmail(): void {
     this.isSubmitting = true;
     this.formSubmitted = false;
-    
-    // Create mailto URL with form data
-    const mailtoUrl = this.createMailtoLink();
-    
+
+    const gmailUrl = this.createGmailLink();
+
     try {
-      // Open email client with pre-filled data
-      window.open(mailtoUrl, '_blank');
-      
-      // Show success message
+      window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+
       this.submitSuccess = true;
       this.errorMessage = '';
       setTimeout(() => {
-        // Reset form after successful submission
         this.contactData = {
           name: '',
           email: '',
@@ -65,16 +61,15 @@ export class ContactComponent {
         };
       }, 100);
     } catch (error) {
-      // Handle any errors
       this.submitSuccess = false;
-      this.errorMessage = 'Could not open email client. Please email me directly at marwenfeki214@gmail.com';
+      this.errorMessage = 'Could not open Gmail. Please email me directly at marwenfeki214@gmail.com';
     } finally {
       this.isSubmitting = false;
       this.formSubmitted = true;
     }
   }
 
-  private createMailtoLink(): string {
+  private createGmailLink(): string {
     const email = 'marwenfeki214@gmail.com';
     const subject = encodeURIComponent(`[Portfolio Contact] ${this.contactData.subject}`);
     const body = encodeURIComponent(
@@ -83,7 +78,7 @@ export class ContactComponent {
       `Message:\n${this.contactData.message}\n\n` +
       `Sent from your portfolio website`
     );
-    
-    return `mailto:${email}?subject=${subject}&body=${body}`;
+
+    return `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
   }
 }
