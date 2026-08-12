@@ -1,151 +1,144 @@
 <div class="about-container">
-  <!-- About Me Section -->
   <section id="about-me" class="about-section animate-on-scroll">
     <h2>About Me</h2>
     <div class="about-content">
       <div class="about-text animate-on-scroll delay-2">
         <p>
-I'm <strong>Marwen Feki</strong>, a Cloud & DevOps Engineering student at <strong>ESPRIT</strong>, 
-currently completing an exchange semester at <strong>Technische Universität Ilmenau</strong>, Germany.
-</p>
+          I'm <strong>Marwen Feki</strong>, a <strong>DevOps & Cloud Engineer</strong> currently completing a Master’s degree in Computer Science while working at <strong>Airbus Defence and Space</strong> in Germany.
+        </p>
 
-<p>
-I am currently working as a <strong>Software Engineering Intern at Airbus</strong>, where I contribute to enterprise-grade software systems and development processes in a highly structured and quality-driven environment.
-</p>
+        <p>
+          I design and operate secure, scalable, and automated cloud infrastructure with a strong focus on Linux systems, Kubernetes, Terraform, CI/CD and observability. My work spans infrastructure-as-code, automation, platform reliability, and operations in security-sensitive environments.
+        </p>
 
-<p>
-My core expertise lies in full-stack engineering and cloud infrastructure. I design backend services with Spring Boot, develop responsive frontend applications using Angular, and deploy distributed systems using Docker, Kubernetes, and Infrastructure-as-Code tools such as Ansible and Terraform.
-</p>
+        <p>
+          My background combines full-stack engineering and cloud operations, with hands-on experience in Spring Boot, Angular, Docker, Kubernetes, Ansible, and AWS-based cloud workflows. I care deeply about building systems that are reliable, measurable, and production-ready.
+        </p>
 
-<p>
-I focus on reliability, automation, scalability, and clean architecture building systems that are not only functional, but resilient and production-ready.
-</p>
-        
         <div class="cv-download animate-on-scroll delay-3">
           <a (click)="downloadCV()" class="download-btn" role="button" style="cursor: pointer;">
             <i class="fas fa-download"></i> Download CV
           </a>
         </div>
       </div>
+
       <div class="about-image animate-on-scroll delay-3">
-        <img src="/assets/images/ME.png" alt="Marwen Feki" class="profile-picture">
+        <div class="profile-card">
+          <img src="/assets/images/ME.png" alt="Marwen Feki" class="profile-picture">
+          <div class="profile-badges">
+            <span>Cloud Engineer</span>
+            <span>DevOps</span>
+            <span>Infrastructure</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Experience Section -->
   <section id="work-experience" class="experience-section animate-on-scroll delay-4">
-    <h2>Work Experience</h2>
-    <div class="timeline">
-      <div class="timeline-item animate-on-scroll" *ngFor="let exp of experiences; let i = index" [style.animation-delay]="(i * 0.2) + 's'">
-      <div class="timeline-date">{{ exp.date }}</div>
-      <div class="timeline-content">
-        <h4>{{ exp.title }}</h4>
-        <p *ngFor="let desc of exp.description">{{ desc }}</p>
-        <p><strong>Technologies:</strong> {{ exp.technologies }}</p>
-      </div>
+    <div class="section-heading">
+      <h2>Work Experience</h2>
     </div>
+
+    <div class="experience-list">
+      <div class="experience-card animate-on-scroll" *ngFor="let exp of experiences; let i = index" [style.animation-delay]="(i * 0.15) + 's'">
+        <div class="experience-header">
+          <div class="company-brand">
+            <img [src]="exp.logo" [alt]="exp.company + ' logo'" class="company-logo">
+            <div>
+              <span class="company-name">{{ exp.company }}</span>
+              <span class="company-location">{{ exp.location }}</span>
+            </div>
+          </div>
+          <span class="experience-date">{{ exp.date }}</span>
+        </div>
+
+        <div class="experience-role-row">
+          <h3>{{ exp.role }}</h3>
+        </div>
+
+        <ul class="experience-points">
+          <li *ngFor="let desc of exp.description">{{ desc }}</li>
+        </ul>
+
+        <div class="tech-stack">
+          <span class="tech-badge" *ngFor="let tech of exp.technologies">{{ tech }}</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Education Section -->
   <section id="education" class="education-section animate-on-scroll delay-5">
     <h2>Education</h2>
     <div class="timeline">
       <div class="timeline-item animate-on-scroll">
-        <div class="timeline-date">Oct 2025 - March 2026</div>
+        <div class="timeline-date">Oct 2025 – Aug 2026</div>
         <div class="timeline-content">
-          <h4>Computer Science Engineering - Cloud & DevOps</h4>
-          <p>technische universität ilmenau, Germany</p>
-          <p>Exchange Semester: Master in Compute Science</p>
+          <h4>Exchange Semester: Computer Science</h4>
+          <p>Technische Universität Ilmenau, Germany</p>
         </div>
       </div>
+
       <div class="timeline-item animate-on-scroll">
-        <div class="timeline-date">Sep 2023 - Jul 2026</div>
+        <div class="timeline-date">Sep 2023 – Aug 2026</div>
         <div class="timeline-content">
-          <h4>Computer Science Engineering - Cloud & DevOps</h4>
-          <p>Private Higher School of Engineering and Technology (ESPRIT), Tunis </p>
+          <h4>Master Degree: DevOps & Cloud Computing Engineering</h4>
+          <p>Private Higher School of Engineering and Technology (ESPRIT), Tunisia</p>
         </div>
       </div>
+
       <div class="timeline-item animate-on-scroll">
-        <div class="timeline-date">Sep 2020 - Jun 2023</div>
+        <div class="timeline-date">Sep 2020 – Jun 2023</div>
         <div class="timeline-content">
-          <h4>Bachelor's Degree in Computer Science Applied to Management</h4>
-          <p>Faculty of Economics and Management, Sfax</p>
+          <h4>Bachelor Degree: Computer Science Applied to Management</h4>
+          <p>University of Economic Science and Management of Sfax (FSEG), Tunisia</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Skills Section -->
   <section class="skills-section animate-on-scroll delay-6">
     <h2>Technical Skills</h2>
+
     <div class="skills-grid">
-      <div class="skill-category animate-on-scroll">
-        <h4>Languages</h4>
-        <ul>
-          <li>Java</li>
-          <li>JavaScript</li>
-          <li>PHP</li>
-          <li>C / C#</li>
-          <li>Python</li>
-          <li>Dart</li>
-        </ul>
-      </div>
-      <div class="skill-category animate-on-scroll">
-        <h4>Frameworks</h4>
-        <ul>
-          <li>Spring Boot</li>
-          <li>Angular</li>
-          <li>Symfony</li>
-          <li>React</li>
-          <li>Flutter</li>
-        </ul>
-      </div>
-      <div class="skill-category animate-on-scroll">
-        <h4>DevOps & Cloud</h4>
-        <ul>
-          <li>Docker</li>
-          <li>Kubernetes</li>
-          <li>Ansible</li>
-          <li>Terraform</li>
-          <li>GitLab CI/CD</li>
-        </ul>
-      </div>
-      <div class="skill-category animate-on-scroll">
-        <h4>Databases & Tools</h4>
-        <ul>
-          <li>MySQL / PostgreSQL</li>
-          <li>IntelliJ IDEA</li>
-          <li>VS Code</li>
-          <li>Enterprise Architect</li>
-          <li>Android Studio</li>
-          <li>Jenkins</li>
-        </ul>
+      <div class="skill-category animate-on-scroll" *ngFor="let group of skillGroups; let i = index">
+        <div class="category-header">
+          <span class="category-icon"><i [ngClass]="group.icon"></i></span>
+          <h4>{{ group.title }}</h4>
+        </div>
+
+        <div class="skill-list">
+          <div class="skill-item" *ngFor="let skill of group.items">
+            <span class="skill-badge" [style.--skill-color]="skill.color">
+              <i [ngClass]="skill.icon"></i>
+            </span>
+            <span>{{ skill.name }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Personal Info Section -->
   <section class="personal-info-section animate-on-scroll delay-7">
     <h2>Personal Information</h2>
     <div class="info-grid">
       <div class="info-item animate-on-scroll">
-        <span class="info-label">Age:</span>
+        <span class="info-label">Age</span>
         <span class="info-value">25 years old</span>
       </div>
       <div class="info-item animate-on-scroll">
-        <span class="info-label">Nationality:</span>
+        <span class="info-label">Nationality</span>
         <span class="info-value">Tunisian</span>
       </div>
       <div class="info-item animate-on-scroll">
-        <span class="info-label">Location:</span>
-        <span class="info-value">Ilmenau, Germany</span>
+        <span class="info-label">Location</span>
+        <span class="info-value">Ingolstadt, Germany</span>
       </div>
       <div class="info-item animate-on-scroll">
-        <span class="info-label">Languages:</span>
+        <span class="info-label">Languages</span>
         <span class="info-value">Arabic, English, French, German</span>
       </div>
     </div>
   </section>
 </div>
+

@@ -122,9 +122,9 @@ export class HomeComponent implements OnInit {
       name: 'Private Cloud Infrastructure',
       description: 'Production-grade private cloud using OpenStack and Kubernetes. Automated infrastructure with Ansible and Heat templates, achieving 99%+ service availability.',
       tags: ['OpenStack, ', ' Kubernetes, ', ' Ansible, ', ' Docker, ', ' Spring Boot, ', ' Angular '],
-      demoLink: '/assets/videos/TurathAi-DemoVideo.mp4',
+      demoLink: 'https://drive.google.com/uc?export=view&id=1mpNo1r0Dgdzie2J5L6n5BuyEHXyilaXJ',
       githubLink: 'https://github.com/MarwenDev2/TurathAI-Frontend',
-      promoVideo: '/assets/videos/TurathAi-Commerical-Video.mp4'
+      promoVideo: 'https://drive.google.com/uc?export=view&id=1P7ENrL93BSz1W54Mcfa_ES2OQR9ORRmL'
     },
     {
       name: 'United Services - HR Management System',
@@ -137,7 +137,7 @@ export class HomeComponent implements OnInit {
         'assets/images/projects/rh4.png',
         'assets/images/projects/rh5.png'
       ],
-      demoLink: '/assets/videos/united-services-demo.mp4',
+      demoLink: 'https://drive.google.com/uc?export=view&id=1gFf5MxunGCiFg_zEFdo-8jVEFD8vAWUo',
       githubLink: 'https://github.com/MarwenDev2/UnitedService-Web'
     }
   ];

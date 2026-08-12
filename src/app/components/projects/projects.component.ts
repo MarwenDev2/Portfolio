@@ -86,8 +86,8 @@ export class ProjectsComponent implements OnInit, AfterViewChecked {
       description: 'Engineered a production-grade private cloud infrastructure from scratch using OpenStack on 7 physical servers. Automated entire deployment lifecycle with Heat templates for VM provisioning and Ansible for Infrastructure-as-Code, deploying a resilient 4-node Kubernetes cluster. Successfully containerized and orchestrated a full-stack application (Spring Boot + Angular + MySQL) using 12+ Kubernetes manifests, implementing automated rolling updates and health checks that ensured 99%+ service availability and self-healing capabilities.',
       
       technologies: ['OpenStack', 'Kubernetes', 'Ansible', 'Docker', 'Spring Boot', 'Angular', 'MySQL', 'Heat Templates', 'Infrastructure-as-Code', 'Linux', 'Bash Scripting'],
-      promoVideo: '/assets/videos/TurathAi-Commerical-Video.mp4',
-      demoLink: '/assets/videos/TurathAi-DemoVideo.mp4',
+      promoVideo: 'https://drive.google.com/uc?export=view&id=1P7ENrL93BSz1W54Mcfa_ES2OQR9ORRmL',
+      demoLink: 'https://drive.google.com/uc?export=view&id=1mpNo1r0Dgdzie2J5L6n5BuyEHXyilaXJ',
       repos: {
         frontend: 'https://github.com/MarwenDev2/TurathAI-Frontend',
         backend: 'https://github.com/MarwenDev2/TurathAI-Backend'
@@ -104,7 +104,7 @@ export class ProjectsComponent implements OnInit, AfterViewChecked {
         'assets/images/projects/rh4.png',
         'assets/images/projects/rh5.png'
       ],
-      demoLink: '/assets/videos/united-services-demo.mp4',
+      demoLink: 'https://drive.google.com/uc?export=view&id=1gFf5MxunGCiFg_zEFdo-8jVEFD8vAWUo',
       repos: {
         frontend: 'https://github.com/MarwenDev2/UnitedService-Web',
         backend: 'https://github.com/MarwenDev2/UnitedService-Backend'
@@ -114,7 +114,7 @@ export class ProjectsComponent implements OnInit, AfterViewChecked {
       name: 'MatchMate - Sports Facility Reservation System',
       description: 'Engineered a full-stack reservation system using Java/JavaFX for desktop and Symfony/PHP for web applications, reducing booking processing time by 40% through real-time availability updates. Designed and implemented a unified MySQL database schema supporting 500+ daily transactions with 99% data consistency. Applied Agile methodologies to deliver a production-ready system handling facility management, user authentication, and payment processing with comprehensive testing strategies.',
       technologies: ['Java', 'JavaFX', 'Symfony', 'PHP', 'MySQL', 'Agile Methodology', 'System Integration', 'Testing'],
-      demoLink: '/assets/videos/matchmate-demo.mp4',
+      demoLink: 'https://drive.google.com/uc?export=view&id=1puWul_b_0_91oThe_nj5PtNcyPKiUXrL',
       githubLink: 'https://github.com/MarwenDev2/MatchMate-Symfony',
       image: [
         'assets/images/projects/matchmate1.jpg',
