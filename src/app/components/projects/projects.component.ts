@@ -196,7 +196,7 @@ closeAllRepoMenus(): void {
 }
   
   ngAfterViewChecked(): void {
-    if (!this.videoModal.isOpen || this.isGoogleDriveVideoUrl(this.videoModal.videoUrl) || !this.videoPlayerRef?.nativeElement || !this.sanitizedVideoUrl) {
+    if (!this.videoModal.isOpen || !this.videoPlayerRef?.nativeElement || !this.sanitizedVideoUrl) {
       return;
     }
 

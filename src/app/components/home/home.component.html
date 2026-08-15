@@ -33,40 +33,26 @@
       <div class="project-card animate-on-scroll" *ngFor="let project of featuredProjects; let i = index" [style.animation-delay]="(i * 0.15) + 's'">
         
         <div class="project-image">
-          <ng-container *ngIf="project.promoVideo; else staticImage">
-            <div class="video-wrapper" (click)="$event.stopPropagation()">
-              <ng-container *ngIf="isGoogleDriveVideoUrl(project.promoVideo); else nativeProjectVideo">
-                <iframe
-                  class="project-video"
-                  [src]="sanitizeUrl(normalizeVideoUrl(project.promoVideo))"
-                  frameborder="0"
-                  allow="autoplay; encrypted-media; picture-in-picture"
-                  allowfullscreen>
-                </iframe>
-              </ng-container>
-
-              <ng-template #nativeProjectVideo>
-                <video
-                  class="project-video"
-                  [src]="normalizeVideoUrl(project.promoVideo)"
-                  [poster]="'assets/images/projects/turathAI.png'">
-                </video>
-              </ng-template>
-
-              <div class="video-overlay" *ngIf="!isGoogleDriveVideoUrl(project.promoVideo)">
-                <i class="fas fa-play-circle"></i>
+          <div class="media-wrapper" (click)="$event.stopPropagation()">
+            <ng-container *ngIf="project.promoVideo; else staticImage">
+              <div class="video-poster" (click)="$event.preventDefault(); openVideoDemo(project.promoVideo)">
+                <img
+                  class="project-img"
+                  [src]="(project.image && project.image.length) ? project.image[currentSlideIndex[i] || 0] : 'assets/images/projects/turathAI.png'"
+                  [alt]="project.name" />
+                <div class="video-overlay">
+                  <i class="fas fa-play-circle"></i>
+                </div>
               </div>
-            </div>
-          </ng-container>
+            </ng-container>
 
-          <ng-template #staticImage>
-            <ng-container *ngIf="project.image && project.image.length > 0">
+            <ng-template #staticImage>
               <img 
-                [src]="project.image[currentSlideIndex[i] || 0]"
+                [src]="(project.image && project.image.length) ? project.image[currentSlideIndex[i] || 0] : (project.image || 'assets/images/project-placeholder.jpg')"
                 class="project-img"
                 [alt]="project.name" />
-            </ng-container>
-          </ng-template>
+            </ng-template>
+          </div>
 
           <div class="project-overlay" (click)="$event.stopPropagation()">
             <div class="project-links">
@@ -120,21 +106,11 @@
       <i class="fas fa-times"></i>
     </button>
 
-    <ng-container *ngIf="isGoogleDriveVideoUrl(videoModal.videoUrl); else nativeVideoModal">
-      <iframe
-        [src]="sanitizeUrl(videoModal.videoUrl)"
-        class="video-frame-embed"
-        frameborder="0"
-        allow="autoplay; encrypted-media; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </ng-container>
-
-    <ng-template #nativeVideoModal>
+    <div class="video-frame">
       <video controls #videoPlayer>
         <source [src]="sanitizedVideoUrl" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-    </ng-template>
+    </div>
   </div>
 </div>
