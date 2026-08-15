@@ -2,6 +2,7 @@ export interface ProjectItem {
   name: string;
   description: string;
   technologies: string[];
+  logo?: string;
   tags?: string[];
   demoLink?: string;
   githubLink?: string;

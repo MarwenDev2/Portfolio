@@ -3,31 +3,48 @@
     <a class="btn outline" [routerLink]="['/projects']">← Back to projects</a>
   </div>
 
-  <div class="project-hero">
-      <div class="hero-media">
+  <div class="project-hero" *ngIf="project">
+    <div class="hero-media">
       <div class="carousel" *ngIf="imageArray && imageArray.length > 0">
         <button class="carousel-btn prev" (click)="prevImage()">‹</button>
-        <img [src]="imageArray[currentImageIndex]" [alt]="project?.name" />
+        <img [src]="imageArray[currentImageIndex]" [alt]="project!.name" />
         <button class="carousel-btn next" (click)="nextImage()">›</button>
         <div class="carousel-indicators">
           <span *ngFor="let img of imageArray; let idx = index" [class.active]="idx === currentImageIndex"></span>
         </div>
       </div>
-      <img *ngIf="(!imageArray || imageArray.length === 0) && !!imageUrl" [src]="imageUrl" [alt]="project?.name" />
-      <img *ngIf="(!imageArray || imageArray.length === 0) && !imageUrl" src="/assets/images/projects/turathAI.png" alt="project image" />
+      <img *ngIf="(!imageArray || imageArray.length === 0) && !!imageUrl" [src]="imageUrl" [alt]="project!.name" />
+      <img *ngIf="(!imageArray || imageArray.length === 0) && !imageUrl" src="/assets/images/turathai-logo.png" alt="project image" />
     </div>
 
     <div class="hero-info">
-      <h1>{{ project?.name }}</h1>
-      <p class="lead">{{ project?.description }}</p>
+      <div class="title-row">
+        <div class="logo-wrap" *ngIf="project.logo">
+          <img [src]="project!.logo" [alt]="project!.name + ' logo'" />
+        </div>
+        <h1 class="project-title">{{ project!.name }}</h1>
+      </div>
+
+      <div class="tech-row">
+        <h3>Technologies</h3>
+        <div class="tech-icons">
+          <span class="tech-badge" *ngFor="let tech of project!.technologies">
+            <i [class]="getTechIcon(tech)"></i>
+            <span class="tech-name">{{ tech }}</span>
+          </span>
+        </div>
+      </div>
+
+      <p class="lead">{{ project!.description }}</p>
+
       <div class="project-links">
-        <a *ngIf="project?.githubLink as gh" [href]="gh" target="_blank" class="btn github">
+        <a *ngIf="project!.githubLink as gh" [href]="gh" target="_blank" class="btn github">
           <i class="fab fa-github"></i> View Code
         </a>
-        <a *ngIf="project?.repos?.frontend as frontendUrl" [href]="frontendUrl" target="_blank" class="btn">
+        <a *ngIf="project!.repos?.frontend as frontendUrl" [href]="frontendUrl" target="_blank" class="btn">
           Frontend Repo
         </a>
-        <a *ngIf="project?.repos?.backend as backendUrl" [href]="backendUrl" target="_blank" class="btn">
+        <a *ngIf="project!.repos?.backend as backendUrl" [href]="backendUrl" target="_blank" class="btn">
           Backend Repo
         </a>
       </div>
@@ -35,22 +52,28 @@
   </div>
 
   <div class="project-body">
-    <section class="project-demo" *ngIf="project && project.demoLink">
+    <section class="project-demo" *ngIf="project">
       <h2>Demonstration</h2>
       <div class="demo-frame">
-        <ng-container *ngIf="isDemoVideo; else iframeDemo">
-          <video controls [src]="project!.demoLink" [poster]="imageArray ? imageArray[0] : imageUrl"></video>
+        <ng-container *ngIf="project.promoVideo">
+          <h4>Commercial</h4>
+          <ng-container *ngIf="isPromoVideo; else promoIframe">
+            <video controls [src]="project!.promoVideo" [poster]="imageArray ? imageArray[0] : imageUrl"></video>
+          </ng-container>
+          <ng-template #promoIframe>
+            <iframe [src]="sanitizedPromoUrl" frameborder="0" allowfullscreen></iframe>
+          </ng-template>
         </ng-container>
 
-        <ng-template #iframeDemo>
-          <iframe [src]="sanitizedDemoUrl" frameborder="0" allowfullscreen></iframe>
-          <div class="demo-fallback">
-            <p>If the demo does not play inline, you can open it directly:</p>
-            <a [href]="project!.demoLink" target="_blank" class="btn">Open Demo in New Tab</a>
-            <a [href]="project!.demoLink" target="_blank" class="btn outline">Download / Open</a>
-            <p *ngIf="isDriveLink(project.demoLink)" class="muted">Note: Google Drive sometimes prevents inline playback. Use the links above to open or download.</p>
-          </div>
-        </ng-template>
+        <ng-container *ngIf="project.demoLink">
+          <h4>Demo</h4>
+          <ng-container *ngIf="isDemoVideo; else demoIframe">
+            <video controls [src]="project!.demoLink" [poster]="imageArray ? imageArray[0] : imageUrl"></video>
+          </ng-container>
+          <ng-template #demoIframe>
+            <iframe [src]="sanitizedDemoUrl" frameborder="0" allowfullscreen></iframe>
+          </ng-template>
+        </ng-container>
       </div>
     </section>
 

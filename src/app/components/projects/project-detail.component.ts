@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule, RouterLink } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { PROJECTS, ProjectItem } from '../../data/projects.data';
 
 @Component({
@@ -14,7 +14,8 @@ import { PROJECTS, ProjectItem } from '../../data/projects.data';
 export class ProjectDetailComponent implements OnInit {
   project: ProjectItem | null = null;
   projectIndex: number | null = null;
-  sanitizedDemoUrl: any = null;
+  sanitizedDemoUrl: SafeResourceUrl | null = null;
+  sanitizedPromoUrl: SafeResourceUrl | null = null;
   currentImageIndex = 0;
 
   constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer) {}
@@ -28,6 +29,11 @@ export class ProjectDetailComponent implements OnInit {
 
     this.projectIndex = index;
     this.project = PROJECTS[index];
+
+    if (this.project?.promoVideo) {
+      const normalizedPromo = this.normalizeVideoUrl(this.project.promoVideo);
+      this.sanitizedPromoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(normalizedPromo);
+    }
 
     if (this.project?.demoLink) {
       const normalized = this.normalizeVideoUrl(this.project.demoLink);
@@ -77,6 +83,36 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   get isDemoVideo(): boolean {
-    return !!this.project?.demoLink && (this.project!.demoLink as string).endsWith('.mp4');
+    return !!this.project?.demoLink && (this.project!.demoLink as string).toLowerCase().endsWith('.mp4');
+  }
+
+  get isPromoVideo(): boolean {
+    return !!this.project?.promoVideo && (this.project!.promoVideo as string).toLowerCase().endsWith('.mp4');
+  }
+
+  // Map tech names to icon classes (mirrors HomeComponent mapping)
+  getTechIcon(tech: string): string {
+    const iconMap: { [key: string]: string } = {
+      'Angular': 'fab fa-angular',
+      'React': 'fab fa-react',
+      'Spring Boot': 'fas fa-leaf',
+      'Java': 'fab fa-java',
+      'Symfony': 'fab fa-symfony',
+      'Node.js': 'fab fa-node-js',
+      'JavaScript': 'fab fa-js',
+      'TypeScript': 'fab fa-js',
+      'PHP': 'fab fa-php',
+      'MySQL': 'fas fa-database',
+      'PostgreSQL': 'fas fa-database',
+      'Docker': 'fab fa-docker',
+      'Kubernetes': 'fas fa-dharmachakra',
+      'Ansible': 'fas fa-network-wired',
+      'Terraform': 'fas fa-cloud',
+      'Jenkins': 'fas fa-cogs',
+      'GitHub Actions': 'fab fa-github',
+      'Google Cloud': 'fas fa-cloud',
+      'Linux': 'fab fa-linux'
+    };
+    return iconMap[tech] || 'fas fa-code';
   }
 }
