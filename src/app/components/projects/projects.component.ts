@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 import { ProjectItem, PROJECTS } from '../../data/projects.data';
+import { RouterLink } from '@angular/router';
 
 type Project = ProjectItem & { isRepoMenuOpen?: boolean };
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
   animations: [

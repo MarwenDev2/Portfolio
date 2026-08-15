@@ -32,4 +32,18 @@ export class ProjectDetailComponent implements OnInit {
       this.sanitizedDemoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.project.demoLink);
     }
   }
+
+  get imageUrl(): string | null {
+    if (this.project && this.project.image && !Array.isArray(this.project.image)) {
+      return this.project.image as string;
+    }
+    return null;
+  }
+
+  get imageArray(): string[] | null {
+    if (this.project && Array.isArray(this.project.image)) {
+      return this.project.image as string[];
+    }
+    return null;
+  }
 }

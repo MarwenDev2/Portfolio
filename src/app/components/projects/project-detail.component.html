@@ -1,8 +1,8 @@
 <div class="project-detail-container">
   <div class="project-hero">
     <div class="hero-media">
-      <img *ngIf="project?.image && !(project.image instanceof Array)" [src]="project?.image as string" [alt]="project?.name" />
-      <img *ngIf="project?.image && (project.image instanceof Array)" [src]="project?.image[0]" [alt]="project?.name" />
+      <img *ngIf="imageUrl" [src]="imageUrl" [alt]="project?.name" />
+      <img *ngIf="imageArray" [src]="imageArray[0]" [alt]="project?.name" />
     </div>
     <div class="hero-info">
       <h1>{{ project?.name }}</h1>

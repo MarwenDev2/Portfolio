@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 import { PROJECTS, ProjectItem } from '../../data/projects.data';
+import { RouterLink } from '@angular/router';
 type Project = ProjectItem & { _index?: number };
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   animations: [
     trigger('fadeInUp', [
       state('initial', style({ opacity: 0, transform: 'translateY(30px)' })),
