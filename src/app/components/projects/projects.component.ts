@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 import { ProjectItem, PROJECTS } from '../../data/projects.data';

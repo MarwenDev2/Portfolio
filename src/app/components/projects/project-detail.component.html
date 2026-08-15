@@ -25,8 +25,8 @@
     <section class="project-demo" *ngIf="project?.demoLink">
       <h2>Demonstration</h2>
       <div class="demo-frame">
-        <video *ngIf="project?.demoLink && project.demoLink.endsWith('.mp4')" controls [src]="project?.demoLink"></video>
-        <iframe *ngIf="project?.demoLink && !project.demoLink.endsWith('.mp4')" [src]="sanitizedDemoUrl" frameborder="0" allowfullscreen></iframe>
+        <video *ngIf="isDemoVideo" controls [src]="project?.demoLink"></video>
+        <iframe *ngIf="project?.demoLink && !isDemoVideo" [src]="sanitizedDemoUrl" frameborder="0" allowfullscreen></iframe>
       </div>
     </section>
 

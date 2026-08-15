@@ -46,4 +46,8 @@ export class ProjectDetailComponent implements OnInit {
     }
     return null;
   }
+
+  get isDemoVideo(): boolean {
+    return !!this.project?.demoLink && (this.project!.demoLink as string).endsWith('.mp4');
+  }
 }
