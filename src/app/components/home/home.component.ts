@@ -1,21 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
-interface Project {
-  name: string;
-  description: string;
-  tags: string[];
-  image?: string[] | string;
-  demoLink?: string;
-  githubLink?: string;
-  promoVideo?: string;
-}
-interface VideoModalState {
-  isOpen: boolean;
-  videoUrl: string;
-}
+import { PROJECTS, ProjectItem } from '../../data/projects.data';
+type Project = ProjectItem & { _index?: number };
 
 @Component({
   selector: 'app-home',
@@ -65,12 +52,6 @@ interface VideoModalState {
 })
 export class HomeComponent implements OnInit {
   animationState = 'initial';
-  videoModal: VideoModalState = {
-    isOpen: false,
-    videoUrl: ''
-  };
-  sanitizedVideoUrl: SafeResourceUrl = '';
-  @ViewChild('videoPlayer') videoPlayerRef!: ElementRef<HTMLVideoElement>;
   
   technologies: string[] = [
     'Angular', 'React', 'Spring Boot', 'Java', 'Symfony',
@@ -117,56 +98,9 @@ export class HomeComponent implements OnInit {
 
   currentSlideIndex: { [key: number]: number } = {};
 
-  featuredProjects: Project[] = [
-    {
-      name: 'Private Cloud Infrastructure',
-      description: 'Production-grade private cloud using OpenStack and Kubernetes. Automated infrastructure with Ansible and Heat templates, achieving 99%+ service availability.',
-      tags: ['OpenStack, ', ' Kubernetes, ', ' Ansible, ', ' Docker, ', ' Spring Boot, ', ' Angular '],
-      demoLink: 'https://drive.google.com/uc?export=view&id=1mpNo1r0Dgdzie2J5L6n5BuyEHXyilaXJ',
-      githubLink: 'https://github.com/MarwenDev2/TurathAI-Frontend',
-      promoVideo: 'https://drive.google.com/uc?export=view&id=1P7ENrL93BSz1W54Mcfa_ES2OQR9ORRmL'
-    },
-    {
-      name: 'United Services - HR Management System',
-      description: 'Full-stack HR platform deployed on private VPS with Docker. Improved routing efficiency by 25% and reduced deployment effort by 30% through automation and Nginx optimization.',
-      tags: ['Angular, ', 'Spring Boot, ', 'MySQL, ', 'Docker, ', 'Nginx, ', 'Linux '],
-      image: [
-        'assets/images/projects/rh1.png',
-        'assets/images/projects/rh2.png',
-        'assets/images/projects/rh3.png',
-        'assets/images/projects/rh4.png',
-        'assets/images/projects/rh5.png'
-      ],
-      demoLink: 'https://drive.google.com/uc?export=view&id=1gFf5MxunGCiFg_zEFdo-8jVEFD8vAWUo',
-      githubLink: 'https://github.com/MarwenDev2/UnitedService-Web'
-    }
-  ];
+  featuredProjects = [] as Project[];
 
-  constructor(private sanitizer: DomSanitizer) {}
-
-  sanitizeUrl(url: string) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-  }
-
-  isGoogleDriveVideoUrl(videoUrl: string): boolean {
-    return !!videoUrl && /drive\.google\.com/i.test(videoUrl);
-  }
-
-  normalizeVideoUrl(videoUrl: string): string {
-    if (!videoUrl) return '';
-
-    const googleDriveFileMatch = videoUrl.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/i);
-    if (googleDriveFileMatch?.[1]) {
-      return `https://drive.google.com/file/d/${googleDriveFileMatch[1]}/preview`;
-    }
-
-    const googleDriveUcMatch = videoUrl.match(/[?&]id=([a-zA-Z0-9_-]+)/i);
-    if (googleDriveUcMatch?.[1]) {
-      return `https://drive.google.com/file/d/${googleDriveUcMatch[1]}/preview`;
-    }
-
-    return videoUrl;
-  }
+  constructor() {}
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -181,25 +115,9 @@ export class HomeComponent implements OnInit {
         }
       });
     }, 5000);
+    // Populate featured projects from shared data (first two) and include global index
+    this.featuredProjects = PROJECTS.map((p, idx) => ({ ...p, _index: idx })).slice(0, 2) as Project[];
   }
 
-  openVideoDemo(videoUrl: string): void {
-    const normalizedVideoUrl = this.normalizeVideoUrl(videoUrl);
-
-    this.videoModal = {
-      isOpen: true,
-      videoUrl: normalizedVideoUrl
-    };
-    this.sanitizedVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(normalizedVideoUrl);
-    document.body.style.overflow = 'hidden';
-  }
-  
-  closeVideoModal(): void {
-    this.videoModal = {
-      isOpen: false,
-      videoUrl: ''
-    };
-    // Re-enable scrolling
-    document.body.style.overflow = '';
-  }
+  // Demo modal removed — project details open in their own page
 }

@@ -1,0 +1,43 @@
+<div class="project-detail-container">
+  <div class="project-hero">
+    <div class="hero-media">
+      <img *ngIf="project?.image && !(project.image instanceof Array)" [src]="project?.image as string" [alt]="project?.name" />
+      <img *ngIf="project?.image && (project.image instanceof Array)" [src]="project?.image[0]" [alt]="project?.name" />
+    </div>
+    <div class="hero-info">
+      <h1>{{ project?.name }}</h1>
+      <p class="lead">{{ project?.description }}</p>
+      <div class="project-links">
+        <a *ngIf="project?.githubLink" [href]="project?.githubLink" target="_blank" class="btn github">
+          <i class="fab fa-github"></i> View Code
+        </a>
+        <a *ngIf="project?.repos?.frontend" [href]="project?.repos?.frontend" target="_blank" class="btn">
+          Frontend Repo
+        </a>
+        <a *ngIf="project?.repos?.backend" [href]="project?.repos?.backend" target="_blank" class="btn">
+          Backend Repo
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-body">
+    <section class="project-demo" *ngIf="project?.demoLink">
+      <h2>Demonstration</h2>
+      <div class="demo-frame">
+        <video *ngIf="project?.demoLink && project.demoLink.endsWith('.mp4')" controls [src]="project?.demoLink"></video>
+        <iframe *ngIf="project?.demoLink && !project.demoLink.endsWith('.mp4')" [src]="sanitizedDemoUrl" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section class="project-details">
+      <h2>Project Details</h2>
+      <p>{{ project?.description }}</p>
+
+      <h3>Technologies Used</h3>
+      <div class="tech-list">
+        <span class="tech-tag" *ngFor="let t of project?.technologies">{{ t }}</span>
+      </div>
+    </section>
+  </div>
+</div>

@@ -33,39 +33,14 @@
       <div class="project-card animate-on-scroll" *ngFor="let project of featuredProjects; let i = index" [style.animation-delay]="(i * 0.15) + 's'">
         
         <div class="project-image">
-          <div class="media-wrapper" (click)="$event.stopPropagation()">
-            <ng-container *ngIf="project.promoVideo; else staticImage">
-              <div class="video-poster" (click)="$event.preventDefault(); openVideoDemo(project.promoVideo)">
-                <img
-                  class="project-img"
-                  [src]="(project.image && project.image.length) ? project.image[currentSlideIndex[i] || 0] : 'assets/images/projects/turathAI.png'"
-                  [alt]="project.name" />
-                <div class="video-overlay">
-                  <i class="fas fa-play-circle"></i>
-                </div>
-              </div>
+          <a class="media-wrapper" [routerLink]="['/projects', project._index]">
+            <ng-container *ngIf="project.image && project.image.length; else singleImage">
+              <img class="project-img" [src]="project.image[currentSlideIndex[i] || 0]" [alt]="project.name" />
             </ng-container>
-
-            <ng-template #staticImage>
-              <img 
-                [src]="(project.image && project.image.length) ? project.image[currentSlideIndex[i] || 0] : (project.image || 'assets/images/project-placeholder.jpg')"
-                class="project-img"
-                [alt]="project.name" />
+            <ng-template #singleImage>
+              <img class="project-img" [src]="project.image || 'assets/images/projects/turathAI.png'" [alt]="project.name" />
             </ng-template>
-          </div>
-
-          <div class="project-overlay" (click)="$event.stopPropagation()">
-            <div class="project-links">
-              <a *ngIf="project.githubLink"
-                [href]="project.githubLink"
-                target="_blank"
-                class="project-action github"
-                title="GitHub Repository"
-                (click)="$event.stopPropagation()">
-                <i class="fab fa-github"></i>
-              </a>
-            </div>
-          </div>
+          </a>
         </div>
         <br>
         <div class="project-content">
@@ -77,13 +52,8 @@
           </div>
           <br>
           <div class="project-buttons">
-            <a *ngIf="project.demoLink" class="btn demo" title="Watch Demo"
-               (click)="$event.preventDefault(); openVideoDemo(project.demoLink)">
-              <i class="fas fa-play"></i> Demo
-            </a>
-            <a [href]="project.githubLink" *ngIf="project.githubLink" target="_blank" class="btn github">
-              <i class="fab fa-github"></i> Repository
-            </a>
+            <a [routerLink]="['/projects', project._index]" class="btn primary">View Project</a>
+            <a [href]="project.githubLink" *ngIf="project.githubLink" target="_blank" class="btn github">Repository</a>
           </div>
           <br>
         </div>
@@ -98,19 +68,4 @@
   </div>
 </section>
 
-<!-- 🎬 Video Modal -->
-<div class="video-modal" *ngIf="videoModal.isOpen">
-  <div class="modal-overlay" (click)="closeVideoModal()"></div>
-  <div class="modal-content">
-    <button class="close-button" (click)="closeVideoModal()">
-      <i class="fas fa-times"></i>
-    </button>
-
-    <div class="video-frame">
-      <video controls #videoPlayer>
-        <source [src]="sanitizedVideoUrl" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-  </div>
-</div>
+ 
