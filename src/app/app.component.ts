@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
@@ -18,6 +19,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     AboutComponent,
     ProjectsComponent,
     ContactComponent,
+    RouterOutlet,
     FooterComponent
   ],
   templateUrl: './app.component.html',
@@ -36,6 +38,19 @@ export class AppComponent implements OnInit, OnDestroy {
   showBackToTop = false;
   activeSection = 'home';
   private observer: IntersectionObserver | null = null;
+  showSections = true;
+  private routerSub: any;
+
+  constructor(private router: Router) {
+    // subscribe to route changes to toggle between sections and routed pages
+    this.routerSub = this.router.events.subscribe(evt => {
+      if (evt instanceof NavigationEnd) {
+        const url = evt.urlAfterRedirects || evt.url;
+        // show static sections only for root/home
+        this.showSections = (url === '/' || url === '/home');
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.initializeIntersectionObserver();
@@ -45,6 +60,9 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.observer) {
       this.observer.disconnect();
+    }
+    if (this.routerSub) {
+      this.routerSub.unsubscribe();
     }
   }
 

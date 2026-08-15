@@ -1,4 +1,7 @@
 <div class="project-detail-container">
+  <div class="detail-back">
+    <a class="btn outline" [routerLink]="['/projects']">← Back to projects</a>
+  </div>
   <div class="project-hero">
     <div class="hero-media">
       <img *ngIf="imageUrl" [src]="imageUrl" [alt]="project?.name" />
