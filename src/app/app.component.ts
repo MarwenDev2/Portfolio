@@ -53,13 +53,20 @@ export class AppComponent implements OnInit, OnDestroy {
       if (evt instanceof NavigationEnd) {
         const url = normalize(evt.urlAfterRedirects || evt.url);
         // hide sections only when navigating to an exact project detail URL
-        this.showSections = !/^\/projects\/[^\/]+$/.test(url);
+        const newShow = !/^\/projects\/[^\/]+$/.test(url);
+        const prevShow = this.showSections;
+        this.showSections = newShow;
+        // If sections became visible after being hidden, re-initialize observer after DOM updates
+        if (!prevShow && newShow) {
+          setTimeout(() => this.initializeIntersectionObserver(), 50);
+        }
       }
     });
   }
 
   ngOnInit(): void {
-    this.initializeIntersectionObserver();
+    // Delay initialization so sections mounted by Angular exist
+    setTimeout(() => this.initializeIntersectionObserver(), 50);
     this.updateScrollProgress();
   }
 
@@ -85,6 +92,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private initializeIntersectionObserver(): void {
+    // Disconnect existing observer to avoid duplicates
+    if (this.observer) {
+      try { this.observer.disconnect(); } catch {}
+      this.observer = null;
+    }
     const options = {
       root: null,
       rootMargin: '-20% 0px -70% 0px',
