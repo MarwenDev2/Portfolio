@@ -42,14 +42,18 @@ export class AppComponent implements OnInit, OnDestroy {
   private routerSub: any;
 
   constructor(private router: Router) {
-    // show sections for all routes except project detail paths (/projects/:id)
-    this.showSections = !this.router.url.startsWith('/projects/');
+    // show sections for all routes except exact project detail paths (/projects/:id)
+    const normalize = (u: string) => (u || '').split('?')[0].split('#')[0];
+    const initialUrl = normalize(this.router.url);
+    const isProjectDetail = /^\/projects\/[^\/]+$/.test(initialUrl);
+    this.showSections = !isProjectDetail;
+
     // subscribe to route changes to toggle between sections and routed pages
     this.routerSub = this.router.events.subscribe(evt => {
       if (evt instanceof NavigationEnd) {
-        const url = evt.urlAfterRedirects || evt.url;
-        // hide sections only when navigating to a project detail URL
-        this.showSections = !url.startsWith('/projects/');
+        const url = normalize(evt.urlAfterRedirects || evt.url);
+        // hide sections only when navigating to an exact project detail URL
+        this.showSections = !/^\/projects\/[^\/]+$/.test(url);
       }
     });
   }
