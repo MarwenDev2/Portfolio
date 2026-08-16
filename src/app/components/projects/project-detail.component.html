@@ -22,31 +22,20 @@
         <div class="logo-wrap" *ngIf="project.logo">
           <img [src]="project!.logo" [alt]="project!.name + ' logo'" />
         </div>
-        <h1 class="project-title">{{ project!.name }}</h1>
-      </div>
-
-      <div class="tech-row">
-        <h3>Technologies</h3>
-        <div class="tech-icons">
-          <span class="tech-badge" *ngFor="let tech of project!.technologies">
-            <i [class]="getTechIcon(tech)"></i>
-            <span class="tech-name">{{ tech }}</span>
-          </span>
+        <div>
+          <h1 class="project-title">{{ project!.name }}</h1>
+          <div class="project-links">
+            <a *ngIf="project!.githubLink as gh" [href]="gh" target="_blank" class="btn github">
+              <i class="fab fa-github"></i> View Code
+            </a>
+            <a *ngIf="project!.repos?.frontend as frontendUrl" [href]="frontendUrl" target="_blank" class="btn github">
+              <i class="fab fa-github"></i> Frontend Repo
+            </a>
+            <a *ngIf="project!.repos?.backend as backendUrl" [href]="backendUrl" target="_blank" class="btn github">
+              <i class="fab fa-github"></i> Backend Repo
+            </a>
+          </div>
         </div>
-      </div>
-
-      <p class="lead">{{ project!.description }}</p>
-
-      <div class="project-links">
-        <a *ngIf="project!.githubLink as gh" [href]="gh" target="_blank" class="btn github">
-          <i class="fab fa-github"></i> View Code
-        </a>
-        <a *ngIf="project!.repos?.frontend as frontendUrl" [href]="frontendUrl" target="_blank" class="btn">
-          Frontend Repo
-        </a>
-        <a *ngIf="project!.repos?.backend as backendUrl" [href]="backendUrl" target="_blank" class="btn">
-          Backend Repo
-        </a>
       </div>
     </div>
   </div>
@@ -79,11 +68,20 @@
 
     <section class="project-details">
       <h2>Project Details</h2>
-      <p>{{ project?.description }}</p>
+      <div class="project-after-media">
+        <div class="project-description">
+          <p>{{ project?.description }}</p>
+        </div>
 
-      <h3>Technologies Used</h3>
-      <div class="tech-list">
-        <span class="tech-tag" *ngFor="let t of project?.technologies">{{ t }}</span>
+        <div class="technologies-block">
+          <h3>Technologies Used</h3>
+          <div class="tech-list">
+            <span class="tech-tag" *ngFor="let t of project?.technologies">
+              <i [class]="getTechIcon(t)"></i>
+              {{ t }}
+            </span>
+          </div>
+        </div>
       </div>
     </section>
   </div>
