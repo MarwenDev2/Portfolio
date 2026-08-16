@@ -140,7 +140,18 @@ export class AboutComponent implements OnInit {
     link.rel = 'noopener noreferrer';
 
     document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    try {
+      link.click();
+    } catch (e) {
+      // In some environments (extensions or content scripts) click may fail; open in new tab as fallback
+      window.open(link.href, '_blank', 'noopener');
+    } finally {
+      // Remove only if still attached to DOM
+      if (link.parentNode) {
+        link.parentNode.removeChild(link);
+      } else if ((link as any).remove) {
+        try { (link as any).remove(); } catch {}
+      }
+    }
   }
 }
