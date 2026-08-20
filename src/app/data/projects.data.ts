@@ -17,7 +17,7 @@ export const PROJECTS: ProjectItem[] = [
     description: 'Engineered a production-grade private cloud infrastructure from scratch using OpenStack on 7 physical servers. Automated entire deployment lifecycle with Heat templates for VM provisioning and Ansible for Infrastructure-as-Code, deploying a resilient 4-node Kubernetes cluster. Successfully containerized and orchestrated a full-stack application (Spring Boot + Angular + MySQL) using 12+ Kubernetes manifests, implementing automated rolling updates and health checks that ensured 99%+ service availability and self-healing capabilities.',
     technologies: ['OpenStack', 'Kubernetes', 'Ansible', 'Docker', 'Spring Boot', 'Angular', 'MySQL', 'Heat Templates', 'Infrastructure-as-Code', 'Linux', 'Bash Scripting'],
     tags: ['OpenStack', 'Kubernetes', 'Ansible', 'Docker'],
-    promoVideo: 'https://drive.google.com/uc?export=view&id=13U3ndE3_M-Tlmo30aJ5-IkVC1l7pFMqy',
+    promoVideo: 'https://drive.google.com/uc?export=view&id=13hafumck5k3cn1BbqbR22dK3JDendnSB',
     logo: 'assets/images/turathai-logo.png',
     demoLink: 'https://drive.google.com/uc?export=view&id=13U3ndE3_M-Tlmo30aJ5-IkVC1l7pFMqy',
     repos: { frontend: 'https://github.com/MarwenDev2/TurathAI-Frontend', backend: 'https://github.com/MarwenDev2/TurathAI-Backend' },

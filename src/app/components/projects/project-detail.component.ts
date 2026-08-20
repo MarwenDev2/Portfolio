@@ -39,6 +39,14 @@ export class ProjectDetailComponent implements OnInit {
       const normalized = this.normalizeVideoUrl(this.project.demoLink);
       this.sanitizedDemoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(normalized);
     }
+
+    // Ensure the detail page loads at the top (fixes routing scroll-to-footer bug)
+    try {
+      setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }), 0);
+    } catch (e) {
+      // fallback for environments without window
+      try { document.documentElement.scrollTop = 0; } catch {}
+    }
   }
 
   normalizeVideoUrl(url: string): string {
