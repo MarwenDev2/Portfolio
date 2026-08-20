@@ -27,7 +27,6 @@ export const PROJECTS: ProjectItem[] = [
     name: 'United Services - HR Management System',
     description: 'Developed a comprehensive HR management platform using Spring Boot and Angular, deployed on a private VPS with Docker containerization. Implemented a multi-container setup with Docker Compose and configured Nginx reverse proxy with TLS termination, improving request routing efficiency by 25%. Automated backend deployment scripts on Linux servers, reducing manual deployment effort by over 30% while enhancing system stability and deployment reliability.',
     technologies: ['Angular', 'Spring Boot', 'MySQL', 'Docker', 'Docker Compose', 'Nginx', 'Linux', 'REST API', 'Bootstrap'],
-    tags: ['Angular', 'Spring Boot', 'Docker', 'MySQL'],
     logo: 'assets/images/unitedservices-logo.png',
     image: [
       'assets/images/projects/rh1.png',
@@ -43,7 +42,6 @@ export const PROJECTS: ProjectItem[] = [
     name: 'MatchMate - Sports Facility Reservation System',
     description: 'Engineered a full-stack reservation system using Java/JavaFX for desktop and Symfony/PHP for web applications, reducing booking processing time by 40% through real-time availability updates. Designed and implemented a unified MySQL database schema supporting 500+ daily transactions with 99% data consistency. Applied Agile methodologies to deliver a production-ready system handling facility management, user authentication, and payment processing with comprehensive testing strategies.',
     technologies: ['Java', 'JavaFX', 'Symfony', 'PHP', 'MySQL', 'Agile Methodology', 'System Integration', 'Testing'],
-    tags: ['Java', 'Symfony', 'MySQL'],
     demoLink: 'https://drive.google.com/uc?export=view&id=1VVc3794I7tpCeXqihJw6FtbHdDeXZOAB',
     logo: 'assets/images/matchmate-logo.png',
     githubLink: 'https://github.com/MarwenDev2/MatchMate-Symfony',

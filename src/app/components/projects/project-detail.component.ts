@@ -61,6 +61,36 @@ export class ProjectDetailComponent implements OnInit {
     return url;
   }
 
+  getDriveFileId(url?: string): string | null {
+    if (!url) return null;
+    const m = url.match(/(?:drive\.google\.com\/file\/d\/|id=)([a-zA-Z0-9_-]+)/i);
+    return m ? m[1] : null;
+  }
+
+  getDriveViewerLink(url?: string): string | null {
+    const id = this.getDriveFileId(url);
+    return id ? `https://drive.google.com/file/d/${id}/view` : null;
+  }
+
+  // Lazy-play state for embeds
+  promoPlaying = false;
+  demoPlaying = false;
+
+  playPromo(): void {
+    this.promoPlaying = true;
+    // ensure iframe src is safe (already sanitized in ngOnInit)
+    setTimeout(() => {
+      try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch {}
+    }, 50);
+  }
+
+  playDemo(): void {
+    this.demoPlaying = true;
+    setTimeout(() => {
+      try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch {}
+    }, 50);
+  }
+
   isDriveLink(url?: string): boolean {
     return !!url && /drive\.google\.com/i.test(url);
   }
