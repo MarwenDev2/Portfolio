@@ -26,16 +26,16 @@ export class AboutComponent implements OnInit {
 
   experiences = [
     {
-      date: 'Apr 2026 – Present',
+      date: 'Apr 2026 – Aug 2026',
       company: 'Airbus Defence and Space',
       location: 'Germany',
       role: 'DevOps Engineer Intern',
       logo: 'assets/images/airbus-logo.png',
       description: [
-        'Administer and maintain Linux-based infrastructure and CI/CD platforms used by engineering teams in complex aerospace environments.',
-        'Develop Python and Bash automation scripts for recurring operational workflows, reducing manual effort and improving platform reliability.',
-        'Investigate pipeline and runtime failures end-to-end, then feed fixes back into deployment procedures and documentation used by software and infrastructure teams.',
-        'Work within security-sensitive aerospace development processes, adhering to rigorous quality, documentation, and engineering standards.'
+        'Developed and maintained a Linux-based CI/CD build pipeline for aerospace software using Jenkins, Docker, Python, and Bash automation.',
+        'Configured Linux build environments and containerized build processes to support software integration and validation.',
+        'Investigated pipeline, build, and runtime failures, improving reliability and reducing manual troubleshooting.',
+        'Collaborated with software engineers on integration and validation within a security-sensitive aerospace environment.'
       ],
       technologies: ['Linux', 'Python', 'Bash', 'C/C++', 'Git', 'CI/CD', 'Docker', 'Jenkins', 'Software Integration']
     },
@@ -65,6 +65,22 @@ export class AboutComponent implements OnInit {
       ],
       technologies: ['Java', 'WSO2 Micro Integrator', 'JWT', 'REST APIs', 'Docker', 'API Integration']
     }
+  ];
+
+  certifications = [
+    'CCNA: Switching, Routing, and Wireless',
+    'Kubernetes Fundamentals',
+    'Linux Foundation LFS101x',
+    'AWS Academy: Cloud Security Foundations',
+    'AWS Academy: Cloud Operations'
+  ];
+
+  languages = [
+    'Arabic : Native',
+    'English : B2',
+    'French : B2',
+    'German : A1 (actively progressing)',
+    'Japanese : A1 (actively progressing)'
   ];
 
   skillGroups = [

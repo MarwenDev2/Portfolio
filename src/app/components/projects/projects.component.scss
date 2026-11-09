@@ -82,6 +82,9 @@ h2 {
   height: 250px;
   position: relative;
   overflow: hidden;
+
+  .project-placeholder { width: 100%; height: 100%; display: grid; place-items: center; }
+  .project-placeholder img { width: 48%; max-height: 80%; object-fit: contain; }
   
   .project-img {
     width: 100%;
@@ -162,6 +165,13 @@ h2 {
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 1rem;
+  }
+
+  .project-context,
+  .project-period {
+    color: var(--text-tertiary);
+    font-size: 0.9rem;
+    margin: 0 0 0.55rem;
   }
   
   .project-description {

@@ -61,6 +61,14 @@ export class ProjectsComponent implements OnInit, AfterViewChecked {
 
   currentSlideIndex: { [key: number]: number } = {};
 
+  getProjectImage(project: ProjectItem, index: number): string | null {
+    if (Array.isArray(project.image)) {
+      return project.image[index] ?? null;
+    }
+
+    return project.image ?? null;
+  }
+
   ngOnInit(): void {
   setTimeout(() => (this.animationState = 'visible'), 100);
 

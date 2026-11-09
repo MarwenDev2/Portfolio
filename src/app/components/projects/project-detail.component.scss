@@ -25,6 +25,8 @@
 .title-row { display:flex; align-items:center; gap:1rem; }
 .logo-wrap img { width:72px; height:72px; object-fit:contain; border-radius:8px; background:rgba(255,255,255,0.02); padding:6px; box-shadow:0 6px 20px rgba(2,6,23,0.15); }
 .project-title { margin:0; font-size:1.6rem; }
+.project-context { color:var(--text-secondary); margin-top:0.45rem; }
+.project-context p { margin:0.2rem 0; }
 .tech-row { margin:0.6rem 0; }
 .tech-icons { display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center; }
 .tech-badge { display:flex; align-items:center; gap:0.5rem; padding:0.35rem 0.6rem; border-radius:999px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.03); }
@@ -60,6 +62,17 @@
 .detail-back .btn { display:inline-block; padding:0.5rem 0.75rem; }
 
 .project-description p { line-height:1.6; color:var(--text-secondary); }
+.project-description ul,
+.project-description ol {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.project-description li {
+  margin-left: 0.25rem;
+  padding-left: 0.25rem;
+  line-height: 1.7;
+}
 
 /* Demo grid cards */
 .stacked-media { display:flex; flex-direction:column; gap:1rem; }

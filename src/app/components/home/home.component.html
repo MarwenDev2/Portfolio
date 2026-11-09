@@ -2,7 +2,7 @@
   <div class="hero">
     <div class="hero-content animate-on-scroll delay-1">
       <h1 class="title animate-on-scroll delay-2">Marwen <span class="highlight">Feki</span> <span class="wave">👋</span></h1>
-      <h2 class="subtitle animate-on-scroll delay-3">Software Engineering Intern &#64; Airbus | Cloud & DevOps Engineer</h2>
+      <h2 class="subtitle animate-on-scroll delay-3">Cloud & DevOps Engineer | Master's Graduate</h2>
       
       <div class="cta-buttons animate-on-scroll delay-4">
         <a href="#about" class="btn primary">
@@ -34,17 +34,22 @@
         
         <div class="project-image">
           <a class="media-wrapper" [routerLink]="['/projects', project._index]">
-            <ng-container *ngIf="project.image && project.image.length; else singleImage">
-              <img class="project-img" [src]="project.image[currentSlideIndex[i] || 0]" [alt]="project.name" />
+            <ng-container *ngIf="getProjectImage(project, currentSlideIndex[i] || 0) as image; else projectPlaceholder">
+              <img class="project-img" [src]="image" [alt]="project.name" />
             </ng-container>
-            <ng-template #singleImage>
-              <img class="project-img" [src]="project.image || 'assets/images/projects/turathAI.png'" [alt]="project.name" />
+            <ng-template #projectPlaceholder>
+              <div class="project-placeholder">
+                <img *ngIf="project.logo" [src]="project.logo" [alt]="project.name + ' logo'" />
+                <i *ngIf="!project.logo" class="fas fa-code" aria-hidden="true"></i>
+              </div>
             </ng-template>
           </a>
         </div>
         <br>
         <div class="project-content">
           <h4>{{ project.name }}</h4>
+          <p class="project-context" *ngIf="project.context">{{ project.context }}</p>
+          <p class="project-period" *ngIf="project.period">{{ project.period }}</p>
           <p>{{ project.description }}</p>
           <br>
           <div class="project-tags">

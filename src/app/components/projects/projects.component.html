@@ -1,23 +1,28 @@
 <div class="projects-container animate-on-scroll">
   <div class="container">
     <h2 class="animate-on-scroll delay-1">My Projects</h2>
-    <p class="section-intro animate-on-scroll delay-2">Here are some of the projects I've worked on, showcasing my skills in full-stack development and cloud technologies.</p>
+    <p class="section-intro animate-on-scroll delay-2">Selected academic and professional projects showcasing my work across cloud infrastructure, software delivery, and full-stack development.</p>
     
     <div class="projects-grid">
       <div class="project-card animate-on-scroll" *ngFor="let project of projects; let i = index" [style.animation-delay]="(i * 0.15) + 's'">
         <div class="project-image">
           <a class="media-wrapper" [routerLink]="['/projects', i]">
-            <ng-container *ngIf="project.image && project.image.length; else singleImage">
-              <img class="project-img" [src]="project.image[currentSlideIndex[i] || 0]" [alt]="project.name" />
+            <ng-container *ngIf="getProjectImage(project, currentSlideIndex[i] || 0) as image; else projectPlaceholder">
+              <img class="project-img" [src]="image" [alt]="project.name" />
             </ng-container>
-            <ng-template #singleImage>
-              <img class="project-img" [src]="project.image || 'assets/images/projects/turathAI.png'" [alt]="project.name" />
+            <ng-template #projectPlaceholder>
+              <div class="project-placeholder">
+                <img *ngIf="project.logo" [src]="project.logo" [alt]="project.name + ' logo'" />
+                <i *ngIf="!project.logo" class="fas fa-code" aria-hidden="true"></i>
+              </div>
             </ng-template>
           </a>
         </div>
 
         <div class="project-details">
           <h3>{{ project.name }}</h3>
+          <p class="project-context" *ngIf="project.context">{{ project.context }}</p>
+          <p class="project-period" *ngIf="project.period">{{ project.period }}</p>
           <div class="project-actions-compact">
             <a [routerLink]="['/projects', i]" class="btn primary">View Project</a>
             <a *ngIf="project.githubLink" [href]="project.githubLink" target="_blank" class="btn github">

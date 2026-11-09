@@ -2,6 +2,9 @@ export interface ProjectItem {
   name: string;
   description: string;
   technologies: string[];
+  context?: string;
+  period?: string;
+  highlights?: string[];
   logo?: string;
   tags?: string[];
   demoLink?: string;
@@ -12,6 +15,21 @@ export interface ProjectItem {
 }
 
 export const PROJECTS: ProjectItem[] = [
+  {
+    name: 'Aerospace CI/CD Build & Integration Pipeline',
+    description: 'A professional DevOps project at Airbus Defence and Space focused on reliable software integration and validation in a security-sensitive aerospace environment.',
+    context: 'Professional project · Airbus Defence and Space',
+    period: 'Apr 2026 – Aug 2026',
+    highlights: [
+      'Developed and maintained a Linux-based CI/CD build pipeline for aerospace software, integrating Jenkins, Docker, Python, and Bash automation.',
+      'Configured Linux build environments and containerized build processes to support software integration and validation.',
+      'Investigated build and runtime failures across the CI/CD workflow, improving reliability and reducing manual troubleshooting.',
+      'Collaborated with software engineers on integration and validation within a security-sensitive aerospace environment.'
+    ],
+    technologies: ['Linux', 'Jenkins', 'Docker', 'Python', 'Bash', 'C/C++', 'Git', 'CI/CD', 'Software Integration'],
+    tags: ['Professional Project', 'CI/CD', 'Linux'],
+    logo: 'assets/images/airbus-logo.png'
+  },
   {
     name: 'Private Cloud Infrastructure & App Deployment',
     description: 'Engineered a production-grade private cloud infrastructure from scratch using OpenStack on 7 physical servers. Automated entire deployment lifecycle with Heat templates for VM provisioning and Ansible for Infrastructure-as-Code, deploying a resilient 4-node Kubernetes cluster. Successfully containerized and orchestrated a full-stack application (Spring Boot + Angular + MySQL) using 12+ Kubernetes manifests, implementing automated rolling updates and health checks that ensured 99%+ service availability and self-healing capabilities.',

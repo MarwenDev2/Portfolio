@@ -4,11 +4,11 @@
     <div class="about-content">
       <div class="about-text animate-on-scroll delay-2">
         <p>
-          I'm <strong>Marwen Feki</strong>, a <strong>Cloud & DevOps Engineer</strong> currently completing a Master’s degree in Computer Science while working at <strong>Airbus Defence and Space</strong> in Germany.
+          I'm <strong>Marwen Feki</strong>, a <strong>Cloud & DevOps Engineer</strong> with a Master's degree in DevOps & Cloud Computing Engineering and professional experience at <strong>Airbus Defence and Space</strong> in Germany.
         </p>
 
         <p>
-          I design and operate secure, scalable, and automated cloud infrastructure with a strong focus on Linux systems, Kubernetes, Terraform, CI/CD and observability. My work spans infrastructure-as-code, automation, platform reliability, and operations in security-sensitive environments.
+          I build and operate secure, scalable cloud infrastructure with a focus on AWS, Kubernetes, Terraform, Linux, Infrastructure as Code, and observability. My experience includes CI/CD automation and platform reliability in security-sensitive environments.
         </p>
 
         <p>
@@ -134,6 +134,20 @@
     </div>
   </section>
 
+  <section class="credentials-section animate-on-scroll delay-7">
+    <h2>Certifications & Languages</h2>
+    <div class="info-grid">
+      <div class="info-item animate-on-scroll">
+        <span class="info-label">Certifications</span>
+        <span class="info-value" *ngFor="let certification of certifications">{{ certification }}</span>
+      </div>
+      <div class="info-item animate-on-scroll">
+        <span class="info-label">Languages</span>
+        <span class="info-value" *ngFor="let language of languages">{{ language }}</span>
+      </div>
+    </div>
+  </section>
+
   <!-- <section class="personal-info-section animate-on-scroll delay-7">
     <h2>Personal Information</h2>
     <div class="info-grid">
@@ -156,4 +170,3 @@
     </div>
   </section> -->
 </div>
-

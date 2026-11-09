@@ -101,6 +101,14 @@ export class HomeComponent implements OnInit {
 
   featuredProjects = [] as Project[];
 
+  getProjectImage(project: ProjectItem, index: number): string | null {
+    if (Array.isArray(project.image)) {
+      return project.image[index] ?? null;
+    }
+
+    return project.image ?? null;
+  }
+
   constructor() {}
 
   ngOnInit(): void {
