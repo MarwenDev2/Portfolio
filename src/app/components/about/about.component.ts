@@ -30,6 +30,8 @@ export class AboutComponent implements OnInit {
       company: 'Airbus Defence and Space',
       location: 'Germany',
       role: 'DevOps Engineer Intern',
+      certificate: '/assets/documents/Airbus-Internship-Certificate.pdf',
+      certificateFileName: 'Airbus-Internship-Certificate.pdf',
       logo: 'assets/images/airbus-logo.png',
       description: [
         'Developed and maintained a Linux-based CI/CD build pipeline for aerospace software using Jenkins, Docker, Python, and Bash automation.',
@@ -44,6 +46,8 @@ export class AboutComponent implements OnInit {
       company: 'United Services',
       location: 'Tunis',
       role: 'DevOps Intern',
+      certificate: '/assets/documents/United-Services-Internship-Certificate.pdf',
+      certificateFileName: 'United-Services-Internship-Certificate.pdf',
       logo: 'assets/images/unitedservices-logo.png',
       description: [
         'Developed a full-stack application using Spring Boot and Angular, delivering an end-to-end product from backend services to user interface.',
@@ -57,6 +61,8 @@ export class AboutComponent implements OnInit {
       company: 'Inetum',
       location: 'Tunis',
       role: 'Engineering Intern',
+      certificate: '/assets/documents/Inetum-Internship-Certificate.pdf',
+      certificateFileName: 'Inetum-Internship-Certificate.pdf',
       logo: 'assets/images/inetum-logo.png',
       description: [
         'Developed a custom Java mediator for WSO2 to generate authentication tokens with configurable expiration policies, packaged and deployed as a Docker image.',
@@ -64,6 +70,27 @@ export class AboutComponent implements OnInit {
         'Collaborated with senior engineers on integration issues and platform extensions for enterprise environments.'
       ],
       technologies: ['Java', 'WSO2 Micro Integrator', 'JWT', 'REST APIs', 'Docker', 'API Integration']
+    }
+  ];
+
+  education = [
+    {
+      date: 'Sep 2023 – Aug 2026',
+      logo: '/assets/images/esprit-logo.png',
+      logoAlt: 'ESPRIT logo',
+      degree: 'Master Degree: Cloud & DevOps Computing Engineering',
+      institution: 'Private Higher School of Engineering and Technology (ESPRIT), Tunisia',
+      diploma: '/assets/documents/Masters-Diploma.pdf',
+      diplomaFileName: 'Masters-Diploma.pdf'
+    },
+    {
+      date: 'Sep 2020 – Jun 2023',
+      logo: '/assets/images/fseg-logo.png',
+      logoAlt: 'FSEG logo',
+      degree: 'Bachelor Degree: Computer Science Applied to Management',
+      institution: 'University of Economic Science and Management of Sfax (FSEG), Tunisia',
+      diploma: '/assets/documents/MARWEN FEKI - NATIONAL BACHELORS DEGREE.pdf',
+      diplomaFileName: 'MARWEN FEKI - NATIONAL BACHELORS DEGREE.pdf'
     }
   ];
 

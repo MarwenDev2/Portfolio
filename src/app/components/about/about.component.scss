@@ -237,6 +237,10 @@ h2 {
 }
 
 .experience-role-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
   margin-bottom: 1rem;
   padding-left: 0.5rem;
 
@@ -244,6 +248,70 @@ h2 {
     font-size: clamp(1.25rem, 2vw, 1.7rem);
     margin: 0;
     color: var(--text-primary);
+  }
+
+  @media (max-width: 480px) {
+    align-items: flex-start;
+
+    h3 {
+      font-size: 1.15rem;
+    }
+  }
+}
+
+.document-download {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(102, 126, 234, 0.35);
+  border-radius: 12px;
+  background: rgba(102, 126, 234, 0.12);
+  color: var(--primary);
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: #fff;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+  }
+
+  &::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    z-index: 2;
+    right: calc(100% + 0.65rem);
+    top: 50%;
+    transform: translateY(-50%) translateX(4px);
+    padding: 0.5rem 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background: #111827;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.4;
+    width: max-content;
+    max-width: min(250px, calc(100vw - 2rem));
+    white-space: normal;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
   }
 }
 
@@ -346,6 +414,7 @@ h2 {
           display: flex;
           align-items: center;
           gap: 1rem;
+          min-width: 0;
 
           .edu-logo {
             width: 64px;
@@ -355,6 +424,11 @@ h2 {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
             padding: 0.45rem;
+          }
+
+          .edu-details {
+            flex: 1;
+            min-width: 0;
           }
         }
 
@@ -508,5 +582,13 @@ h2 {
   .timeline-content,
   .info-item {
     border-radius: 18px;
+  }
+
+  .timeline-content .edu-row {
+    flex-wrap: wrap;
+  }
+
+  .timeline-content .edu-row .document-download {
+    margin-left: auto;
   }
 }

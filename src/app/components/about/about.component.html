@@ -55,6 +55,15 @@
 
         <div class="experience-role-row">
           <h3>{{ exp.role }}</h3>
+          <a
+            class="document-download"
+            [href]="exp.certificate"
+            [attr.download]="exp.certificateFileName"
+            [attr.data-tooltip]="'Download certificate for ' + exp.company + ' internship'"
+            [attr.aria-label]="'Download certificate for ' + exp.company + ' internship'"
+            [title]="'Download certificate for ' + exp.company + ' internship'">
+            <i class="fas fa-download" aria-hidden="true"></i>
+          </a>
         </div>
 
         <ul class="experience-points">
@@ -84,28 +93,24 @@
         </div>
       </div>
 
-      <div class="timeline-item animate-on-scroll">
-        <div class="timeline-date">Sep 2023 – Aug 2026</div>
+      <div class="timeline-item animate-on-scroll" *ngFor="let item of education">
+        <div class="timeline-date">{{ item.date }}</div>
         <div class="timeline-content">
           <div class="edu-row">
-            <img class="edu-logo" src="/assets/images/esprit-logo.png" alt="ESPRIT logo">
-            <div>
-              <h4>Master Degree: Cloud & DevOps Computing Engineering</h4>
-              <p>Private Higher School of Engineering and Technology (ESPRIT), Tunisia</p>
+            <img class="edu-logo" [src]="item.logo" [alt]="item.logoAlt">
+            <div class="edu-details">
+              <h4>{{ item.degree }}</h4>
+              <p>{{ item.institution }}</p>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-item animate-on-scroll">
-        <div class="timeline-date">Sep 2020 – Jun 2023</div>
-        <div class="timeline-content">
-          <div class="edu-row">
-            <img class="edu-logo" src="/assets/images/fseg-logo.png" alt="FSEG logo">
-            <div>
-              <h4>Bachelor Degree: Computer Science Applied to Management</h4>
-              <p>University of Economic Science and Management of Sfax (FSEG), Tunisia</p>
-            </div>
+            <a
+              class="document-download"
+              [href]="item.diploma"
+              [attr.download]="item.diplomaFileName"
+              [attr.data-tooltip]="'Download diploma for ' + item.degree"
+              [attr.aria-label]="'Download diploma for ' + item.degree"
+              [title]="'Download diploma for ' + item.degree">
+              <i class="fas fa-download" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
       </div>
